@@ -30,30 +30,30 @@
                                     <td class="mot-double"></td>
                                 <?php endif; ?>
                             <?php elseif (($i==$j && (($i>0 && $i<5) || ($i>9 && $i<14))) ||
-                                        ($i==14-$j && (($i>0 && $i<5) || ($i>9 && $i<14)))) :  ?>
-                                <td class="mot-double"></td>
-                            <?php elseif (($i%7 == 0 && $j == 3)
-                            || ($i == 3 && $j%7 == 0)
-                            || ($i%7 == 0 && $j == 11)
-                            || ($i == 11 && $j%7 == 0)
-                            || (($i-2)%4 == 0 && ($j-2)%4 == 0 && $i<7 && $j<7)
-                            || ((12-$i)%4 == 0 && ($j-2)%4 == 0 && $i>7 && $j<7)
-                            || (($i-2)%4 == 0 && (12-$j)%4 == 0 && $i<7 && $j>7)
-                            || ((12-$i)%4 == 0 && (12-$j)%4 == 0 && $i>7 && $j>7)
-                            ) : ?>
-                                <td class="lettre-double"></td>
-                            <?php elseif (($i-1)%4 == 0 && ($j-1)%4 == 0) : ?>
-                                <td class="lettre-triple"></td>
-                            <?php else : ?>
-                                <td></td>
-                            <?php endif; ?>
+                            ($i==14-$j && (($i>0 && $i<5) || ($i>9 && $i<14)))) :  ?>
+                            <td class="mot-double"></td>
+                        <?php elseif (($i%7 == 0 && $j == 3)
+                        || ($i == 3 && $j%7 == 0)
+                        || ($i%7 == 0 && $j == 11)
+                        || ($i == 11 && $j%7 == 0)
+                        || (($i-2)%4 == 0 && ($j-2)%4 == 0 && $i<7 && $j<7)
+                        || ((12-$i)%4 == 0 && ($j-2)%4 == 0 && $i>7 && $j<7)
+                        || (($i-2)%4 == 0 && (12-$j)%4 == 0 && $i<7 && $j>7)
+                        || ((12-$i)%4 == 0 && (12-$j)%4 == 0 && $i>7 && $j>7)
+                        ) : ?>
+                        <td class="lettre-double"></td>
+                    <?php elseif (($i-1)%4 == 0 && ($j-1)%4 == 0) : ?>
+                        <td class="lettre-triple"></td>
+                    <?php else : ?>
+                        <td></td>
+                    <?php endif; ?>
 
 
-                        <?php endfor; ?>
-                    </tr>
                 <?php endfor; ?>
-            </table>
-        </div>
-    </main>
+            </tr>
+        <?php endfor; ?>
+    </table>
+</div>
+</main>
 </body>
 </html>
