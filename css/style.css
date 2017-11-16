@@ -81,6 +81,11 @@ p span{
     line-height: 1.5em;
 }
 
+.def{
+    font-size: 2em;
+    text-align: center;
+}
+
 .def-lettre-double{
     background: lightblue;
     color: lightblue;
@@ -117,6 +122,14 @@ p span{
     margin-top: 30px;
 }
 
+#lettres{
+    margin-top: 80px;
+}
+
+#tirage{
+    margin-top: 120px;
+}
+
 .lettre{
     background: #BD8D46;
     width: 3vw;
@@ -124,5 +137,10 @@ p span{
     text-align: center;
     font-size: 2.5em;
     font-weight: bold;
-    border: 1px solid white;
+    border: 1px solid silver;
+}
+
+.espace{
+    width: 3vw;
+    height: 3vw;
 }
