@@ -124,15 +124,15 @@ $lettreTirees = $_SESSION['tirage'];
                             <?php for ($j = 0 ; $j < 15 ; $j++) : ?>
                                 <?php if ($i%7 == 0 && $j%7 == 0) : ?>
                                     <?php if ($i!=7 || $j!=7) : ?>
-                                        <td id="<?= chr($i+65).($j+1) ?>" class="case mot-triple"></td>
+                                        <td id="<?= chr($i+65).($j+1) ?>" class="position case mot-triple"></td>
                                     <?php else : ?>
-                                        <td id="<?= chr($i+65).($j+1) ?>" class="case mot-double"></td>
+                                        <td id="<?= chr($i+65).($j+1) ?>" class="position case mot-double"></td>
                                     <?php endif; ?>
                                 <?php elseif (($i==$j && (($i>0 && $i<5)
                                 || ($i>9 && $i<14)))
                                 || ($i==14-$j && (($i>0 && $i<5)
                                 || ($i>9 && $i<14)))) : ?>
-                                <td id="<?= chr($i+65).($j+1) ?>" class="case mot-double"></td>
+                                <td id="<?= chr($i+65).($j+1) ?>" class="position case mot-double"></td>
                             <?php elseif (($i%7 == 0 && $j == 3)
                             || ($i == 3 && $j%7 == 0)
                             || ($i%7 == 0 && $j == 11)
@@ -141,11 +141,11 @@ $lettreTirees = $_SESSION['tirage'];
                             || ((12-$i)%4 == 0 && ($j-2)%4 == 0 && $i>7 && $j<7)
                             || (($i-2)%4 == 0 && (12-$j)%4 == 0 && $i<7 && $j>7)
                             || ((12-$i)%4 == 0 && (12-$j)%4 == 0 && $i>7 && $j>7)) : ?>
-                            <td id="<?= chr($i+65).($j+1) ?>" class="case lettre-double"></td>
+                            <td id="<?= chr($i+65).($j+1) ?>" class="position case lettre-double"></td>
                         <?php elseif (($i-1)%4 == 0 && ($j-1)%4 == 0) : ?>
-                            <td id="<?= chr($i+65).($j+1) ?>" class="case lettre-triple"></td>
+                            <td id="<?= chr($i+65).($j+1) ?>" class="position case lettre-triple"></td>
                         <?php else : ?>
-                            <td id="<?= chr($i+65).($j+1) ?>" class="case autre-case"></td>
+                            <td id="<?= chr($i+65).($j+1) ?>" class="position case autre-case"></td>
                         <?php endif; ?>
                     <?php endfor; ?>
                 </tr>
@@ -225,6 +225,8 @@ $lettreTirees = $_SESSION['tirage'];
             </form>
         </div>
     </div><!-- fin row -->
+    
+    <!-- affichage des lettres tirées -->
     <div class="row">
         <table id="tirage">
             <tr>
