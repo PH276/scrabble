@@ -52,19 +52,16 @@ if (!empty($_POST['lettreChoisie'])){
         $lettreChoisie = $_POST['lettreChoisie'];
 
         if ($_SESSION['lettres'][$lettreChoisie] > 0){
-            // echo '<pre>';
-            // print_r ($_SESSION);
-            // echo '</pre>';
-
             --$_SESSION['lettres'][$lettreChoisie];
-
 
             $_SESSION['tirage'] .= $_POST['lettreChoisie'];
 
+            // enregistrement du tirage en base de données
             $req = $pdo -> prepare("UPDATE infos SET info=:info WHERE info_type='tirage'");
             $req -> bindParam(':info', $_SESSION['tirage'], PDO::PARAM_STR);
             $req -> execute();
 
+            // enregistrement du nombre de lettres restantes en BDD
             $req = $pdo -> prepare("UPDATE lettres SET nombreRestant = :nombreRestant WHERE lettre = :lettreChoisie");
             $req -> bindParam(':nombreRestant', $_SESSION['lettres'][$lettreChoisie], PDO::PARAM_INT);
             $req -> bindParam(':lettreChoisie', $lettreChoisie, PDO::PARAM_STR);
@@ -78,9 +75,19 @@ if (!empty($_POST['lettreChoisie'])){
 
 // vider le tirage
 if (isset($_POST['vider'])){
+    for ($i = 0 ; $i < strlen($_SESSION['tirage']) ; $i++){
+        $lettre = substr($_SESSION['tirage'], $i, 1);
+        ++$_SESSION['lettres'][$lettre];
+        $req = $pdo -> prepare("UPDATE lettres SET nombreRestant=nombreRestant+1 WHERE lettre = :lettre");
+        $req -> bindParam(':lettre', $lettre, PDO::PARAM_STR);
+        $req -> execute();
+    }
+
     $_SESSION['tirage'] = '';
     $req = $pdo -> query("UPDATE infos SET info='' WHERE info_type='tirage'");
     $req -> execute();
+
+
 }
 
 $lettreTirees = $_SESSION['tirage'];
@@ -117,15 +124,15 @@ $lettreTirees = $_SESSION['tirage'];
                             <?php for ($j = 0 ; $j < 15 ; $j++) : ?>
                                 <?php if ($i%7 == 0 && $j%7 == 0) : ?>
                                     <?php if ($i!=7 || $j!=7) : ?>
-                                        <td class="case mot-triple"></td>
+                                        <td id="<?= chr($i+65).($j+1) ?>" class="case mot-triple"></td>
                                     <?php else : ?>
-                                        <td class="case mot-double"></td>
+                                        <td id="<?= chr($i+65).($j+1) ?>" class="case mot-double"></td>
                                     <?php endif; ?>
                                 <?php elseif (($i==$j && (($i>0 && $i<5)
                                 || ($i>9 && $i<14)))
                                 || ($i==14-$j && (($i>0 && $i<5)
                                 || ($i>9 && $i<14)))) : ?>
-                                <td class="case mot-double"></td>
+                                <td id="<?= chr($i+65).($j+1) ?>" class="case mot-double"></td>
                             <?php elseif (($i%7 == 0 && $j == 3)
                             || ($i == 3 && $j%7 == 0)
                             || ($i%7 == 0 && $j == 11)
@@ -134,11 +141,11 @@ $lettreTirees = $_SESSION['tirage'];
                             || ((12-$i)%4 == 0 && ($j-2)%4 == 0 && $i>7 && $j<7)
                             || (($i-2)%4 == 0 && (12-$j)%4 == 0 && $i<7 && $j>7)
                             || ((12-$i)%4 == 0 && (12-$j)%4 == 0 && $i>7 && $j>7)) : ?>
-                            <td class="case lettre-double"></td>
+                            <td id="<?= chr($i+65).($j+1) ?>" class="case lettre-double"></td>
                         <?php elseif (($i-1)%4 == 0 && ($j-1)%4 == 0) : ?>
-                            <td class="case lettre-triple"></td>
+                            <td id="<?= chr($i+65).($j+1) ?>" class="case lettre-triple"></td>
                         <?php else : ?>
-                            <td class="case autre-case"></td>
+                            <td id="<?= chr($i+65).($j+1) ?>" class="case autre-case"></td>
                         <?php endif; ?>
                     <?php endfor; ?>
                 </tr>
@@ -149,23 +156,21 @@ $lettreTirees = $_SESSION['tirage'];
     </tr> -->
     <table id="legende">
         <tr>
-            <td></td>
             <td class="case lettre-double"></td>
-            <td class="def" colspan="6">lettre compte double</td>
+            <td class="def" colspan="7">lettre compte double</td>
             <td></td>
             <td class="case lettre-triple"></td>
-            <td class="def" colspan="6">lettre compte triple</td>
+            <td class="def" colspan="7">lettre compte triple</td>
         </tr>
         <tr>
             <td class="case"></td>
         </tr>
         <tr>
-            <td></td>
             <td class="case mot-double"></td>
-            <td class="def" colspan="6">mot compte double</td>
+            <td class="def" colspan="7">mot compte double</td>
             <td></td>
             <td class="case mot-triple"></td>
-            <td class="def" colspan="6">mot compte triple</td>
+            <td class="def" colspan="7">mot compte triple</td>
         </tr>
     </table>
 
@@ -206,9 +211,9 @@ $lettreTirees = $_SESSION['tirage'];
                                 <?php if ($lettre == ' ') : ?>
                                     <td class="case"></td>
                                 <?php elseif ($lettre == '_') : ?>
-                                    <td class="case lettre blanc"><?= $lettre ?></td>
+                                    <td class="reserve case lettre blanc"><?= $lettre ?></td>
                                 <?php else : ?>
-                                    <td class="case lettre"><?= $lettre ?></td>
+                                    <td class="reserve case lettre"><?= $lettre ?></td>
                                 <?php endif; ?>
                             <?php endfor; ?>
                         </tr>
@@ -217,7 +222,6 @@ $lettreTirees = $_SESSION['tirage'];
             </table>
             <form method="post" action="" id="form-lettre-choisie">
                 <input type="hidden" name="lettreChoisie" value ="">
-
             </form>
         </div>
     </div><!-- fin row -->
@@ -225,7 +229,12 @@ $lettreTirees = $_SESSION['tirage'];
         <table id="tirage">
             <tr>
                 <?php for ($i = 0 ; $i < strlen($lettreTirees) ; $i++) : ?>
-                    <td class="case lettre"><?= substr($lettreTirees, $i, 1); ?></td>
+                    <?php if ((substr($lettreTirees, $i, 1) == '_')) : ?>
+                        <td class="choix case blanc lettre"><?= substr($lettreTirees, $i, 1); ?></td>
+                    <?php else : ?>
+                        <td class="choix case lettre"><?= substr($lettreTirees, $i, 1); ?></td>
+                    <?php endif; ?>
+
                 <?php endfor; ?>
                 <td class="case"></td>
                 <form method="post">
