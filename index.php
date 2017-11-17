@@ -83,179 +83,44 @@
     <div class="col-md-6">
         <div class="row">
             <div class="col-md-12">
+                <?php $reserve = array (
+                    'AAA BB  D EEEEE',
+                    'AAA     D EEEEE',
+                    'AAA  CC D EEEEE',
+                    '',
+                    'F G H IIIIJ LLL',
+                    'F G H IIII K LL',
+                    '',
+                    'M NN OO P RR SS',
+                    'M NN OO P RR SS',
+                    'M NN OO  QRR SS',
+                    '',
+                    'TTT UUU V W Y ',
+                    'TTT UUU V  X Z'
+                );
+                ?>
                 <table id="lettres">
-                    <tr>
-                        <?php for ($i = 0 ; $i < 3 ; $i++) : ?>
-                            <td class="lettre">A</td>
-                        <?php endfor; ?>
-                        <td class="espace"></td>
-                        <td class="lettre">B</td>
-                        <td class="lettre">B</td>
-                        <td class="espace"></td>
-                        <td class="espace"></td>
-                        <td class="lettre">D</td>
-                        <td class="espace"></td>
-                        <?php for ($i = 0 ; $i < 5 ; $i++) : ?>
-                            <td class="lettre">E</td>
-                        <?php endfor; ?>
-                    </tr>
-                    <tr>
-                        <?php for ($i = 0 ; $i < 3 ; $i++) : ?>
-                            <td class="lettre">A</td>
-                        <?php endfor; ?>
-                        <td class="espace"></td>
-                        <td class="espace"></td>
-                        <td class="espace"></td>
-                        <td class="espace"></td>
-                        <td class="espace"></td>
-                        <td class="lettre">D</td>
-                        <td class="espace"></td>
-                        <?php for ($i = 0 ; $i < 5 ; $i++) : ?>
-                            <td class="lettre">E</td>
-                        <?php endfor; ?>
-                    </tr>
-                    <tr>
-                        <?php for ($i = 0 ; $i < 3 ; $i++) : ?>
-                            <td class="lettre">A</td>
-                        <?php endfor; ?>
-                        <td class="espace"></td>
-                        <td class="espace"></td>
-                        <td class="lettre">C</td>
-                        <td class="lettre">C</td>
-                        <td class="espace"></td>
-                        <td class="lettre">D</td>
-                        <td class="espace"></td>
-                        <?php for ($i = 0 ; $i < 5 ; $i++) : ?>
-                            <td class="lettre">E</td>
-                        <?php endfor; ?>
-                    </tr>
-                    <tr>
-                        <td class="espace"></td>
-                    </tr>
-                    <tr>
-                        <td class="lettre">F</td>
-                        <td class="espace"></td>
-                        <td class="lettre">G</td>
-                        <td class="espace"></td>
-                        <td class="lettre">H</td>
-                        <td class="espace"></td>
-                        <?php for ($i = 0 ; $i < 4 ; $i++) : ?>
-                            <td class="lettre">I</td>
-                        <?php endfor; ?>
-                        <td class="lettre">J</td>
-                        <td class="espace"></td>
-                        <?php for ($i = 0 ; $i < 3 ; $i++) : ?>
-                            <td class="lettre">L</td>
-                        <?php endfor; ?>
-                    </tr>
-                    <tr>
-                        <td class="lettre">F</td>
-                        <td class="espace"></td>
-                        <td class="lettre">G</td>
-                        <td class="espace"></td>
-                        <td class="lettre">H</td>
-                        <td class="espace"></td>
-                        <?php for ($i = 0 ; $i < 4 ; $i++) : ?>
-                            <td class="lettre">I</td>
-                        <?php endfor; ?>
-                        <td class="espace"></td>
-                        <td class="lettre">K</td>
-                        <td class="espace"></td>
-                        <?php for ($i = 0 ; $i < 2 ; $i++) : ?>
-                            <td class="lettre">L</td>
-                        <?php endfor; ?>
-                    </tr>
-                    <tr>
-                        <td class="espace"></td>
-                    </tr>
-                    <tr>
-                        <td class="lettre">M</td>
-                        <td class="espace"></td>
-                        <td class="lettre">N</td>
-                        <td class="lettre">N</td>
-                        <td class="espace"></td>
-                        <td class="lettre">O</td>
-                        <td class="lettre">O</td>
-                        <td class="espace"></td>
-                        <td class="lettre">P</td>
-                        <td class="espace"></td>
-                        <td class="lettre">R</td>
-                        <td class="lettre">R</td>
-                        <td class="espace"></td>
-                        <td class="lettre">S</td>
-                        <td class="lettre">S</td>
-                    </tr>
-                    <tr>
-                        <td class="lettre">M</td>
-                        <td class="espace"></td>
-                        <td class="lettre">N</td>
-                        <td class="lettre">N</td>
-                        <td class="espace"></td>
-                        <td class="lettre">O</td>
-                        <td class="lettre">O</td>
-                        <td class="espace"></td>
-                        <td class="lettre">P</td>
-                        <td class="espace"></td>
-                        <td class="lettre">R</td>
-                        <td class="lettre">R</td>
-                        <td class="espace"></td>
-                        <td class="lettre">S</td>
-                        <td class="lettre">S</td>
-                    </tr>
-                    <tr>
-                        <td class="lettre">M</td>
-                        <td class="espace"></td>
-                        <td class="lettre">N</td>
-                        <td class="lettre">N</td>
-                        <td class="espace"></td>
-                        <td class="lettre">O</td>
-                        <td class="lettre">O</td>
-                        <td class="espace"></td>
-                        <td class="espace"></td>
-                        <td class="lettre">Q</td>
-                        <td class="lettre">R</td>
-                        <td class="lettre">R</td>
-                        <td class="espace"></td>
-                        <td class="lettre">S</td>
-                        <td class="lettre">S</td>
-                    </tr>
-                    <tr>
-                        <td class="espace"></td>
-                    </tr>
-                    <tr>
-                        <?php for ($i = 0 ; $i < 3 ; $i++) : ?>
-                            <td class="lettre">T</td>
-                        <?php endfor; ?>
-                        <td class="espace"></td>
-                        <?php for ($i = 0 ; $i < 3 ; $i++) : ?>
-                            <td class="lettre">U</td>
-                        <?php endfor; ?>
-                        <td class="espace"></td>
-                        <td class="lettre">V</td>
-                        <td class="espace"></td>
-                        <td class="lettre">W</td>
-                        <td class="espace"></td>
-                        <td class="lettre">Y</td>
-                        <td class="espace"></td>
-                        <td class="lettre"></td>
-                    </tr>
-                    <tr>
-                        <?php for ($i = 0 ; $i < 3 ; $i++) : ?>
-                            <td class="lettre">T</td>
-                        <?php endfor; ?>
-                        <td class="espace"></td>
-                        <?php for ($i = 0 ; $i < 3 ; $i++) : ?>
-                            <td class="lettre">U</td>
-                        <?php endfor; ?>
-                        <td class="espace"></td>
-                        <td class="lettre">V</td>
-                        <td class="espace"></td>
-                        <td class="espace"></td>
-                        <td class="lettre">X</td>
-                        <td class="espace"></td>
-                        <td class="lettre">Z</td>
-                        <td class="lettre"></td>
-                    </tr>
+                    <?php foreach ($reserve as $ligne) : ?>
+                        <?php if (strlen($ligne) == 0) : ?>
+                            <tr>
+                                <td class="espace"></td>
+                            </tr>
+                        <?php else : ?>
+                            <tr>
+                                <?php for ($i = 0 ; $i < strlen($ligne) ; $i++) : ?>
+                                    <?php $lettre = substr($ligne, $i, 1); ?>
+                                    <?php if ($lettre == ' ') : ?>
+                                        <td class="espace"></td>
+                                    <?php else : ?>
+                                        <td class="lettre"><?= $lettre ?></td>
+                                    <?php endif; ?>
+                                <?php endfor; ?>
+                            <?php if (strlen($ligne) == 14) : ?>
+                                <td class="lettre"></td>
+                            <?php endif; ?>
+                        </tr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </table>
             </div>
         </div><!-- fin row -->
