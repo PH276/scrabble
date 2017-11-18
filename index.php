@@ -1,50 +1,23 @@
 <?php session_start();
-$msg = '';
-
 //connexion à la BDD
 $pdo = new PDO("mysql:host=localhost;dbname=scrabble", 'root', '', array(
     PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
 ));
 
-// nouvelle partie
-if (isset($_POST['nouvellePartie'])){
-    session_destroy();
-    // mise à zéro du tirage
-    $req = $pdo -> query("UPDATE infos SET info='' WHERE info_type='tirage'");
-    $req -> execute();
+// A l'arrivée sur cette page, récupération des données de la BDD
+// récupération du tirage
+$req = $pdo -> query("SELECT info FROM infos WHERE info_type='tirage'");
+$tirage = $req->fetch(PDO::FETCH_ASSOC);
+$_SESSION['tirage'] = $tirage['info'];
 
-    // MAJ de la BDD pour le nombre de lettres restantes
-    $req = $pdo -> query("UPDATE lettres SET nombreRestant = nombre");
-    $req -> execute();
-
-    // initialisation de la session des lettres restantants
-    $req = $pdo -> query("SELECT lettre, nombreRestant FROM lettres");
-    $lettres = $req -> fetchAll(PDO::FETCH_ASSOC);
-    foreach ($lettres as $lettre){
-        $_SESSION['lettres'][$lettre['lettre']] = $lettre['nombreRestant'];
-    }
-    $_SESSION['tirage'] = '';
-    // echo '<pre>';
-    // print_r ($_SESSION);
-    // echo '</pre>';
+// récupération de la quantité des lettres restantes
+$req = $pdo -> query("SELECT lettre, nombreRestant FROM lettres");
+$lettres = $req -> fetchAll(PDO::FETCH_ASSOC);
+foreach ($lettres as $lettre){
+    $_SESSION['lettres'][$lettre['lettre']] = $lettre['nombreRestant'];
 }
-
-// En cas d'arrivée sur le navigateur,
-if (!isset($_SESSION['tirage'])){
-    // récupération du tirage stocké ds la BDD
-    $req = $pdo -> query("SELECT info FROM infos WHERE info_type='tirage'");
-    $tirage = $req->fetch(PDO::FETCH_ASSOC);
-    $_SESSION['tirage'] = $tirage['info'];
-
-    // récupération de la quantité des lettres restantes
-    $req = $pdo -> query("SELECT lettre, nombreRestant FROM lettres");
-    $lettres = $req -> fetchAll(PDO::FETCH_ASSOC);
-    foreach ($lettres as $lettre){
-
-        $_SESSION['lettres'][$lettre['lettre']] = $lettre['nombreRestant'];
-    }
-}
+// =====================================================================
 
 // enregistrement des lettres tirées
 if (!empty($_POST['lettreChoisie'])){
@@ -109,7 +82,7 @@ $lettreTirees = $_SESSION['tirage'];
     <main class="container-fluid">
         <div class="row">
             <div class="col-md-6" id="table">
-                <?php echo $msg; ?>
+                <p id='msg'></p>
                 <!-- plateau de jeu -->
                 <table>
                     <tr>
@@ -194,42 +167,43 @@ $lettreTirees = $_SESSION['tirage'];
                 'TTT UUU V  X Z_'
             );
             ?>
-            <form method="post">
-                <input type="submit" name="nouvellePartie" value="Nouvelle partie">
-            </form>
+            <button type="button" id="newPartie">Nouvelle partie</button>
+            <!-- <form method="post">
+            <input type="submit" name="nouvellePartie" value="Nouvelle partie">
+        </form> -->
 
-            <table id="lettres">
-                <?php foreach ($reserve as $ligne) : ?>
-                    <?php if (strlen($ligne) == 0) : ?>
-                        <tr>
-                            <td class="case"></td>
-                        </tr>
-                    <?php else : ?>
-                        <tr>
-                            <?php for ($i = 0 ; $i < strlen($ligne) ; $i++) : ?>
-                                <?php $lettre = substr($ligne, $i, 1); ?>
-                                <?php if ($lettre == ' ') : ?>
-                                    <td class="case"></td>
-                                <?php elseif ($lettre == '_') : ?>
-                                    <td class="reserve case lettre blanc"><?= $lettre ?></td>
-                                <?php else : ?>
-                                    <td class="reserve case lettre"><?= $lettre ?></td>
-                                <?php endif; ?>
-                            <?php endfor; ?>
-                        </tr>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </table>
-            <form method="post" action="" id="form-lettre-choisie">
-                <input type="hidden" name="lettreChoisie" value ="">
-            </form>
-        </div>
-    </div><!-- fin row -->
-    
-    <!-- affichage des lettres tirées -->
-    <div class="row">
-        <table id="tirage">
-            <tr>
+        <table id="lettres">
+            <?php foreach ($reserve as $ligne) : ?>
+                <?php if (strlen($ligne) == 0) : ?>
+                    <tr>
+                        <td class="case"></td>
+                    </tr>
+                <?php else : ?>
+                    <tr>
+                        <?php for ($i = 0 ; $i < strlen($ligne) ; $i++) : ?>
+                            <?php $lettre = substr($ligne, $i, 1); ?>
+                            <?php if ($lettre == ' ') : ?>
+                                <td class="case"></td>
+                            <?php elseif ($lettre == '_') : ?>
+                                <td class="reserve case lettre blanc"><?= $lettre ?></td>
+                            <?php else : ?>
+                                <td class="reserve case lettre"><?= $lettre ?></td>
+                            <?php endif; ?>
+                        <?php endfor; ?>
+                    </tr>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </table>
+        <form method="post" action="" id="form-lettre-choisie">
+            <input type="hidden" name="lettreChoisie" value ="">
+        </form>
+    </div>
+</div><!-- fin row -->
+
+<!-- affichage des lettres tirées -->
+<div class="row">
+    <table id="tirage">
+        <tr>
                 <?php for ($i = 0 ; $i < strlen($lettreTirees) ; $i++) : ?>
                     <?php if ((substr($lettreTirees, $i, 1) == '_')) : ?>
                         <td class="choix case blanc lettre"><?= substr($lettreTirees, $i, 1); ?></td>
