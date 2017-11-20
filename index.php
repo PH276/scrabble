@@ -1,17 +1,5 @@
 <?php
-session_start();
-// session_destroy();
-// $test = "ABCDEFG";
-// $pos = strpos($test, 'D');
-// echo  $pos.'<br>';
-// $mot1 = substr($test, 0, $pos);
-// $mot2 = substr($test, $pos+1);
-// echo $mot1 . $mot2 . '<br>';
-//connexion à la BDD
-$pdo = new PDO("mysql:host=localhost;dbname=scrabble", 'root', '', array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
-    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
-));
+require_once ('inc/init.inc.php');
 
 // A l'arrivée sur cette page, récupération des données de la BDD, en cas de session inexistante
 // echo '<pre>';
