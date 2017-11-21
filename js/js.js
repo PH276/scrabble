@@ -44,6 +44,7 @@ function ecouteurChoix(elt){
             positionChoisie = e.currentTarget.id;
             console.log(positionChoisie);
             console.log(lettreChoisie);
+            $('#'+positionChoisie).removeClass('case-valeur')
             $('#'+positionChoisie).addClass('lettre');
             $('#'+positionChoisie).append(lettreChoisie);
             $('.position').off('click');

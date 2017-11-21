@@ -26,22 +26,41 @@ th, .entete{
 
 .lettre-double{
     background: lightblue;
-    /*border:6px solid black;*/
+}
+
+.case-valeur.lettre-double:after{
+    content: "lettre compte double";
 }
 
 .lettre-triple{
     background: darkblue;
-    /*border:6px solid black;*/
 }
 
-.mot-double{
+.case-valeur.lettre-triple:after{
+    color:white;
+    content: "lettre compte triple";
+}
+
+.mot-double, .case-centre{
     background: pink;
-    /*border:6px solid black;*/
+}
+
+.case-valeur.case-centre:after{
+    font-family: 'Glyphicons Halflings';
+    content: "\e006";
+    font-size: 2em;
+}
+
+.case-valeur.mot-double:after{
+    content: "mot compte double";
 }
 
 .mot-triple{
     background: red;
-    /*border:6px solid black;*/
+}
+
+.case-valeur.mot-triple:after{
+    content: "mot compte triple";
 }
 
 .autre-case{
@@ -52,9 +71,9 @@ th, .entete{
     border: 5px solid white;
 }
 
-.cadre-noir{
-    /*border: 5px solid black;*/
-}
+/*.cadre-noir{
+    border: 5px solid black;
+}*/
 
 #legende {
     margin-top: 30px;
@@ -77,30 +96,6 @@ p span{
 .def{
     font-size: .8em;
     text-align: center;
-}
-
-.def-lettre-double{
-    background: lightblue;
-    color: lightblue;
-
-}
-
-.def-lettre-triple{
-    background: darkblue;
-    color: darkblue;
-
-}
-
-.def-mot-double{
-    background: pink;
-    color: pink;
-
-}
-
-.def-mot-triple{
-    background: red;
-    color: red;
-
 }
 
 .lettres{

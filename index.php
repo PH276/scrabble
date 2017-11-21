@@ -80,14 +80,14 @@ require_once ('inc/init.inc.php');
                                 <?php $position = chr($i+65).($j+1);
                                 $isLettrePlacee =  isset($_SESSION['jeu'][$position]);
                                 $lettrePlacee = ($isLettrePlacee)?$_SESSION['jeu'][$position]:'';
-                                $caseLettre = ($isLettrePlacee)?' lettre':'';
+                                $caseLettre = ($isLettrePlacee)?' lettre':' case-valeur';
                                 ?>
                                 <?php //$position = chr($i+65).($j+1); ?>
                                 <?php if ($i%7 == 0 && $j%7 == 0) : ?>
                                     <?php if ($i!=7 || $j!=7) : ?>
                                         <td id="<?= $position ?>" class="position case mot-triple<?= $caseLettre ?>"><?= $lettrePlacee ?></td>
                                     <?php else : ?>
-                                        <td id="<?= $position ?>" class="position case mot-double<?= $caseLettre ?>"><?= $lettrePlacee ?></td>
+                                        <td id="<?= $position ?>" class="position case case-centre<?= $caseLettre ?>"><?= $lettrePlacee ?></td>
                                     <?php endif; ?>
                                 <?php elseif (($i==$j && (($i>0 && $i<5)
                                 || ($i>9 && $i<14)))
