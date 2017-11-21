@@ -6,7 +6,7 @@ require_once ('inc/init.inc.php');
 // print_r ($_SESSION);
 // echo '</pre>';
 
-if (empty($_SESSION)){
+// if (empty($_SESSION)){
 
     // récupération du tirage
     $req = $pdo -> query("SELECT info FROM infos WHERE info_type='tirage'");
@@ -31,7 +31,7 @@ if (empty($_SESSION)){
     }
     $_SESSION['jeu'] = $jeu;
 
-}
+// }
 
 // =====================================================================
 
