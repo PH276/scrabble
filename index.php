@@ -8,28 +8,28 @@ require_once ('inc/init.inc.php');
 
 // if (empty($_SESSION)){
 
-    // récupération du tirage
-    $req = $pdo -> query("SELECT info FROM infos WHERE info_type='tirage'");
-    $tirage = $req->fetch(PDO::FETCH_ASSOC);
-    $_SESSION['tirage'] = $tirage['info'];
+// récupération du tirage
+$req = $pdo -> query("SELECT info FROM infos WHERE info_type='tirage'");
+$tirage = $req->fetch(PDO::FETCH_ASSOC);
+$_SESSION['tirage'] = $tirage['info'];
 
-    // récupération de la quantité des lettres restantes
-    $stockLettres = array();
-    $req = $pdo -> query("SELECT lettre, nombreRestant FROM lettres");
-    $lettres = $req -> fetchAll(PDO::FETCH_ASSOC);
-    foreach ($lettres as $lettre){
-        $stockLettres[$lettre['lettre']] = $lettre['nombreRestant'];
-    }
-    $_SESSION['lettres'] = $stockLettres;
+// récupération de la quantité des lettres restantes
+$stockLettres = array();
+$req = $pdo -> query("SELECT lettre, nombreRestant FROM lettres");
+$lettres = $req -> fetchAll(PDO::FETCH_ASSOC);
+foreach ($lettres as $lettre){
+    $stockLettres[$lettre['lettre']] = $lettre['nombreRestant'];
+}
+$_SESSION['lettres'] = $stockLettres;
 
-    // récupération des lettres du jeu
-    $jeu = array();
-    $req = $pdo -> query("SELECT position, lettre FROM jeu");
-    $lettresJeu = $req -> fetchAll(PDO::FETCH_ASSOC);
-    foreach ($lettresJeu as $lettreJeu){
-        $jeu[$lettreJeu['position']] = $lettreJeu['lettre'];
-    }
-    $_SESSION['jeu'] = $jeu;
+// récupération des lettres du jeu
+$jeu = array();
+$req = $pdo -> query("SELECT position, lettre FROM jeu");
+$lettresJeu = $req -> fetchAll(PDO::FETCH_ASSOC);
+foreach ($lettresJeu as $lettreJeu){
+    $jeu[$lettreJeu['position']] = $lettreJeu['lettre'];
+}
+$_SESSION['jeu'] = $jeu;
 
 // }
 
@@ -43,7 +43,7 @@ require_once ('inc/init.inc.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -63,6 +63,7 @@ require_once ('inc/init.inc.php');
     <div class="row">
         <div class="col-md-6" id="table">
             <p id='msg'></p>
+
             <div class="row">
 
                 <!-- plateau de jeu -->
@@ -116,7 +117,7 @@ require_once ('inc/init.inc.php');
     <!-- affichage des lettres tirées -->
     <?php include ('inc/tirage.inc.php'); ?>
     <!-- <h2 id="afficheTirage">Lettres piochées</h2> -->
-    <div class="row">
+    <div class="col-md-6">
         <table>
             <tr id="tirage">
                 <?= $rep['tirage'];  ?>
@@ -151,29 +152,204 @@ require_once ('inc/init.inc.php');
             <input type="submit" name="nouvellePartie" value="Nouvelle partie">
         </form>
     -->
+    <div class="row ligne-reserve">
+        <div id="A">
+            <?php for($i = 0 ; $i < 9 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">A</div>
+                <?php if (($i+1)%3 == 0) : ?>
+                    <div class="clear"></div>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
 
-    <table id="lettres">
-        <?php foreach ($reserve as $ligne) : ?>
-            <?php if (strlen($ligne) == 0) : ?>
-                <tr>
-                    <td class="case"></td>
-                </tr>
-            <?php else : ?>
-                <tr>
-                    <?php for ($i = 0 ; $i < strlen($ligne) ; $i++) : ?>
-                        <?php $lettre = substr($ligne, $i, 1); ?>
-                        <?php if ($lettre == ' ') : ?>
-                            <td class="case"></td>
-                        <?php elseif ($lettre == '_') : ?>
-                            <td class="reserve case lettre blanc"><?= $lettre ?></td>
-                        <?php else : ?>
-                            <td class="reserve case lettre"><?= $lettre ?></td>
-                        <?php endif; ?>
-                    <?php endfor; ?>
-                </tr>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </table>
+        <div id="B">
+            <?php for($i = 0 ; $i < 2 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">B</div>
+            <?php endfor; ?>
+
+        </div>
+
+        <div id="C">
+            <?php for($i = 0 ; $i < 2 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">C</div>
+            <?php endfor; ?>
+        </div>
+
+        <div id="D">
+            <?php for($i = 0 ; $i < 3 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">D</div>
+                <div class="clear"></div>
+            <?php endfor; ?>
+        </div>
+
+        <div id="E">
+            <?php for($i = 0 ; $i < 15 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">E</div>
+                <?php if (($i+1)%5 == 0 && $i != 8) : ?>
+                    <div class="clear"></div>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+
+        <div id="F">
+            <?php for($i = 0 ; $i < 2 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">F</div>
+                <div class="clear"></div>
+            <?php endfor; ?>
+        </div>
+
+        <div id="G">
+            <?php for($i = 0 ; $i < 2 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">G</div>
+                <div class="clear"></div>
+            <?php endfor; ?>
+        </div>
+
+        <div id="H">
+            <?php for($i = 0 ; $i < 2 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">H</div>
+                <div class="clear"></div>
+            <?php endfor; ?>
+        </div>
+
+        <div id="I">
+            <?php for($i = 0 ; $i < 8 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">I</div>
+                <?php if (($i+1)%4 == 0 && $i != 8) : ?>
+                    <div class="clear"></div>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+
+        <div id="J">
+            <div class="lettres-reserve case lettre">J</div>
+            <div class="clear"></div>
+        </div>
+
+        <div id="K">
+            <div class="lettres-reserve case lettre">K</div>
+            <div class="clear"></div>
+        </div>
+
+        <div id="L">
+            <?php for($i = 0 ; $i < 5 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">L</div>
+                <?php if (($i+1)%3 == 0 && $i != 8) : ?>
+                    <div class="clear"></div>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+
+        <div id="M">
+            <?php for($i = 0 ; $i < 3 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">M</div>
+                <div class="clear"></div>
+            <?php endfor; ?>
+        </div>
+
+        <div id="N">
+            <?php for($i = 0 ; $i < 6 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">N</div>
+                <?php if (($i+1)%2 == 0 && $i != 8) : ?>
+                    <div class="clear"></div>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+
+        <div id="O">
+            <?php for($i = 0 ; $i < 6 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">O</div>
+                <?php if (($i+1)%2 == 0 && $i != 8) : ?>
+                    <div class="clear"></div>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+
+        <div id="P">
+            <?php for($i = 0 ; $i < 2 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">P</div>
+                <div class="clear"></div>
+            <?php endfor; ?>
+        </div>
+
+        <div id="Q">
+            <div class="lettres-reserve case lettre">Q</div>
+            <div class="clear"></div>
+        </div>
+
+        <div id="R">
+            <?php for($i = 0 ; $i < 6 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">R</div>
+                <?php if (($i+1)%2 == 0 && $i != 8) : ?>
+                    <div class="clear"></div>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+
+        <div id="S">
+            <?php for($i = 0 ; $i < 6 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">S</div>
+                <?php if (($i+1)%2 == 0 && $i != 8) : ?>
+                    <div class="clear"></div>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+
+        <div id="T">
+            <?php for($i = 0 ; $i < 6 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">T</div>
+                <?php if (($i+1)%3 == 0 && $i != 8) : ?>
+                    <div class="clear"></div>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+
+        <div id="U">
+            <?php for($i = 0 ; $i < 6 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">U</div>
+                <?php if (($i+1)%3 == 0 && $i != 8) : ?>
+                    <div class="clear"></div>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+
+        <div id="V">
+            <?php for($i = 0 ; $i < 2 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">V</div>
+                <div class="clear"></div>
+            <?php endfor; ?>
+        </div>
+
+
+        <div id="W">
+            <div class="lettres-reserve case lettre">W</div>
+            <div class="clear"></div>
+        </div>
+
+        <div id="X">
+            <div class="lettres-reserve case lettre">X</div>
+            <div class="clear"></div>
+        </div>
+
+        <div id="Y">
+            <div class="lettres-reserve case lettre">Y</div>
+            <div class="clear"></div>
+        </div>
+
+        <div id="Z">
+            <div class="lettres-reserve case lettre">Z</div>
+            <div class="clear"></div>
+        </div>
+
+        <div id="_">
+            <?php for($i = 0 ; $i < 2 ; $i++) : ?>
+                <div class="lettres-reserve case lettre">_</div>
+                <div class="clear"></div>
+            <?php endfor; ?>
+        </div>
+
+    </div>
+
     <!-- <form method="post" action="" id="form-lettre-choisie">
     <input type="hidden" name="lettreChoisie" value ="">
 </form> -->
