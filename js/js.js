@@ -26,29 +26,34 @@ function ajax(para, fich_php, reponseAttendue){
     };
 }
 
+var isLettreChoisie = false;
+function ecouteurChoix(elt){
+    if (!isLettreChoisie){
+        isLettreChoisie = true;
 
-function ecouteurChoix(e){
 
-    // positionner une lettre lettre choisie du tirage
-    var lettreChoisie = '';
-    var positionChoisie = '';
-    // choix d'une lettre
-    lettreChoisie = e.innerHTML;
-    console.log(lettreChoisie);
-    // choix de la position où placer la lettre choisie
-    $('.position').on('click', function(e){
-        positionChoisie = e.currentTarget.id;
-        console.log(positionChoisie);
+        // positionner une lettre lettre choisie du tirage
+        var lettreChoisie = '';
+        var positionChoisie = '';
+        // choix d'une lettre
+        lettreChoisie = elt.innerHTML;
         console.log(lettreChoisie);
-        $('#'+positionChoisie).addClass('lettre');
-        $('#'+positionChoisie).append(lettreChoisie);
-        $('.position').off('click');
-        parameters = "lettreChoisie="+lettreChoisie;
-        parameters += "&positionChoisie="+positionChoisie;
-        ajax(parameters, 'lettrePourMotAjax.php', true);
-        lettreChoisie = '';
+        // choix de la position où placer la lettre choisie
+        $('.position').on('click', function(e){
+            isLettreChoisie = false;
+            positionChoisie = e.currentTarget.id;
+            console.log(positionChoisie);
+            console.log(lettreChoisie);
+            $('#'+positionChoisie).addClass('lettre');
+            $('#'+positionChoisie).append(lettreChoisie);
+            $('.position').off('click');
+            parameters = "lettreChoisie="+lettreChoisie;
+            parameters += "&positionChoisie="+positionChoisie;
+            ajax(parameters, 'lettrePourMotAjax.php', true);
+            lettreChoisie = '';
 
-    });
+        });
+    }
 }
 
 // $(document).ready(function() {
@@ -60,15 +65,20 @@ $('#newPartie').on('click', function(){
 });
 
 // choix d'une lettre de réserve
-$('.reserve').on('click', function(e){
-    lettreChoisie = e.currentTarget.childNodes[0].data;
-    var parameters = "lettreChoisie=" + lettreChoisie;
-    ajax(parameters, 'uneLettreTireeAjax.php', true);
-});
+// $('.reserve').on('click', function(e){
+//     lettreChoisie = e.currentTarget.childNodes[0].data;
+//     var parameters = "lettreChoisie=" + lettreChoisie;
+//     ajax(parameters, 'uneLettreTireeAjax.php', true);
+// });
 
 // choix d'une lettre de réserve
 $('#vider').on('click', function(e){
     ajax('', 'videTirageAjax.php', true);
+});
+
+// tirage automatique
+$('#NouveauTirage').on('click', function(e){
+    ajax('', 'tirageAutomatiqueAjax.php', true);
 });
 
 // ================ fin ajax ===============================

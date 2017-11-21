@@ -15,31 +15,37 @@ th, .entete{
 .case{
     width: 40px;
     height: 40px;
+    /*border:6px solid black;*/
+}
+
+.position{
+    font-size: .7em;
+    text-align: center;
+    border:6px solid black;
 }
 
 .lettre-double{
     background: lightblue;
-    border:6px solid black;
+    /*border:6px solid black;*/
 }
 
 .lettre-triple{
     background: darkblue;
-    border:6px solid black;
+    /*border:6px solid black;*/
 }
 
 .mot-double{
     background: pink;
-    border:6px solid black;
+    /*border:6px solid black;*/
 }
 
 .mot-triple{
     background: red;
-    border:6px solid black;
+    /*border:6px solid black;*/
 }
 
 .autre-case{
     background: green;
-    border:6px solid black;
 }
 
 .cadre-blanc{
@@ -47,21 +53,13 @@ th, .entete{
 }
 
 .cadre-noir{
-    border: 5px solid black;
+    /*border: 5px solid black;*/
 }
 
 #legende {
     margin-top: 30px;
 }
-.legende{
-    margin-top: 15px;
-    margin-left: 50px;
-}
 
-.ligne-legende{
-    /*height: 4vw;*/
-    margin: 5px 0;
-}
 
 .inline-block{
     display: inline-block;
@@ -77,7 +75,7 @@ p span{
 }
 
 .def{
-    font-size: 2em;
+    font-size: .8em;
     text-align: center;
 }
 
@@ -118,7 +116,12 @@ p span{
 }
 
 #afficheTirage{
-    margin-top: 80px;
+    margin: 30px;
+    text-align:center;
+}
+
+#boutonsTirage{
+    margin: 50px;
 }
 
 .lettre{
@@ -128,6 +131,11 @@ p span{
     font-weight: bold;
     border: 1px solid silver;
 }
+
+#plateau {
+    margin-bottom: 30px;
+}
+
 
 .blanc{
     color: #BD8D46;

@@ -51,19 +51,22 @@ if (empty($_SESSION)){
 </head>
 <body>
     <!-- <div id="session">
-    </div> -->
-    <?php
-    // echo '<pre>';
-    // print_r ($_SESSION);
-    // echo '</pre>';
+</div> -->
+<?php
 
-     ?>
-    <main class="container-fluid">
-        <div class="row">
-            <div class="col-md-6" id="table">
-                <p id='msg'></p>
+// echo '<pre>';
+// print_r ($_SESSION);
+// echo '</pre>';
+
+?>
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-md-6" id="table">
+            <p id='msg'></p>
+            <div class="row">
+
                 <!-- plateau de jeu -->
-                <table>
+                <table id="plateau">
                     <tr>
                         <th></th>
                         <?php for ($i = 0 ; $i < 15 ; $i++) : ?>
@@ -78,8 +81,8 @@ if (empty($_SESSION)){
                                 $isLettrePlacee =  isset($_SESSION['jeu'][$position]);
                                 $lettrePlacee = ($isLettrePlacee)?$_SESSION['jeu'][$position]:'';
                                 $caseLettre = ($isLettrePlacee)?' lettre':'';
-                                 ?>
-                                <?php $position = chr($i+65).($j+1); ?>
+                                ?>
+                                <?php //$position = chr($i+65).($j+1); ?>
                                 <?php if ($i%7 == 0 && $j%7 == 0) : ?>
                                     <?php if ($i!=7 || $j!=7) : ?>
                                         <td id="<?= $position ?>" class="position case mot-triple<?= $caseLettre ?>"><?= $lettrePlacee ?></td>
@@ -109,28 +112,18 @@ if (empty($_SESSION)){
                 </tr>
             <?php endfor; ?>
         </table>
-        <!-- <tr>
-        <td class="case"></td>
-    </tr> -->
-    <table id="legende">
-        <tr>
-            <td class="case lettre-double"></td>
-            <td class="def" colspan="7">lettre compte double</td>
-            <td></td>
-            <td class="case lettre-triple"></td>
-            <td class="def" colspan="7">lettre compte triple</td>
-        </tr>
-        <tr>
-            <td class="case"></td>
-        </tr>
-        <tr>
-            <td class="case mot-double"></td>
-            <td class="def" colspan="7">mot compte double</td>
-            <td></td>
-            <td class="case mot-triple"></td>
-            <td class="def" colspan="7">mot compte triple</td>
-        </tr>
-    </table>
+    </div>
+    <!-- affichage des lettres tirées -->
+    <?php include ('inc/tirage.inc.php'); ?>
+    <!-- <h2 id="afficheTirage">Lettres piochées</h2> -->
+    <div class="row">
+        <table>
+            <tr id="tirage">
+                <?= $rep['tirage'];  ?>
+            </tr>
+        </table>
+    </div>
+
 
 </div><!-- fin col-md-6 -->
 <div class="col-md-6">
@@ -152,55 +145,48 @@ if (empty($_SESSION)){
                 'TTT UUU V  X Z_'
             );
             ?>
-            <button type="button" id="newPartie">Nouvelle partie</button>
-            <!-- <form method="post">
+            <button class="btn btn-warning" type="button" id="newPartie">Nouvelle partie</button>
+            <!--
+            <form method="post">
             <input type="submit" name="nouvellePartie" value="Nouvelle partie">
-        </form> -->
+        </form>
+    -->
 
-        <table id="lettres">
-            <?php foreach ($reserve as $ligne) : ?>
-                <?php if (strlen($ligne) == 0) : ?>
-                    <tr>
-                        <td class="case"></td>
-                    </tr>
-                <?php else : ?>
-                    <tr>
-                        <?php for ($i = 0 ; $i < strlen($ligne) ; $i++) : ?>
-                            <?php $lettre = substr($ligne, $i, 1); ?>
-                            <?php if ($lettre == ' ') : ?>
-                                <td class="case"></td>
-                            <?php elseif ($lettre == '_') : ?>
-                                <td class="reserve case lettre blanc"><?= $lettre ?></td>
-                            <?php else : ?>
-                                <td class="reserve case lettre"><?= $lettre ?></td>
-                            <?php endif; ?>
-                        <?php endfor; ?>
-                    </tr>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </table>
-        <!-- <form method="post" action="" id="form-lettre-choisie">
-        <input type="hidden" name="lettreChoisie" value ="">
-    </form> -->
+    <table id="lettres">
+        <?php foreach ($reserve as $ligne) : ?>
+            <?php if (strlen($ligne) == 0) : ?>
+                <tr>
+                    <td class="case"></td>
+                </tr>
+            <?php else : ?>
+                <tr>
+                    <?php for ($i = 0 ; $i < strlen($ligne) ; $i++) : ?>
+                        <?php $lettre = substr($ligne, $i, 1); ?>
+                        <?php if ($lettre == ' ') : ?>
+                            <td class="case"></td>
+                        <?php elseif ($lettre == '_') : ?>
+                            <td class="reserve case lettre blanc"><?= $lettre ?></td>
+                        <?php else : ?>
+                            <td class="reserve case lettre"><?= $lettre ?></td>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </tr>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </table>
+    <!-- <form method="post" action="" id="form-lettre-choisie">
+    <input type="hidden" name="lettreChoisie" value ="">
+</form> -->
 </div>
 </div><!-- fin row -->
 
-<!-- affichage des lettres tirées -->
-<div class="row">
-    <table id="afficheTirage">
-        <tr id="tirage">
-            <?php include ('inc/tirage.inc.php'); ?>
-            <?= $rep['tirage'];  ?>
-        </tr>
-        <tr>
-            <td class="case"></td>
-        </tr>
-        <tr>
-            <td>
-                <button type="button" id="vider">Vider</button>
-            </td>
-        </tr>
-    </table>
+<div id="boutonsTirage" class="row">
+    <div class="col-md-3 col-md-offset-3">
+        <button class="btn btn-primary" type="button" id="NouveauTirage">Nouvelles Lettres</button>
+    </div>
+    <div class="col-md-2 col-md-offset-2">
+        <button class="btn btn-primary" type="button" id="vider">Vider</button>
+    </div>
 </div>
 </div>
 </div>
