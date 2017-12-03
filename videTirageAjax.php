@@ -8,6 +8,8 @@ for ($i = 0 ; $i < strlen($_SESSION['tirage']) ; $i++){
     $req = $pdo -> prepare("UPDATE lettres SET nombreRestant=nombreRestant+1 WHERE lettre = :lettre");
     $req -> bindParam(':lettre', $lettre, PDO::PARAM_STR);
     $req -> execute();
+
+    $rep[$lettre] = $_SESSION['lettres'][$lettre];
 }
 
 // mise à zéro du tirage

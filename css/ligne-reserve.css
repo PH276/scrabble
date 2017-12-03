@@ -1,0 +1,160 @@
+#A{
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+#B{
+    position: absolute;
+    top:0;
+    left:160px;
+}
+
+#C{
+    position: absolute;
+    top:80px;
+    left:200px;
+}
+
+#D{
+    position: absolute;
+    left:320px;
+}
+
+#E{
+    position: absolute;
+    left:400px;
+}
+
+#F{
+    position: absolute;
+	left:0;
+    top:160px;
+}
+
+#G{
+    position: absolute;
+    top:160px;
+    left:80px;
+}
+
+#H{
+    position: absolute;
+    top:160px;
+    left:160px;
+}
+
+#I{
+    position: absolute;
+    top:160px;
+    left:240px;
+}
+
+#J{
+    position: absolute;
+    top:160px;
+    left:400px;
+}
+
+#K{
+    position: absolute;
+    top:200px;
+    left:440px;
+}
+
+#L{
+    position: absolute;
+    top:160px;
+    left:480px;
+}
+
+#M{
+    position: absolute;
+	left:0;
+    top:280px;
+}
+
+#N{
+    position: absolute;
+    top:280px;
+    left:80px;
+}
+
+#O{
+    position: absolute;
+    top:280px;
+    left:200px;
+}
+
+#P{
+    position: absolute;
+    top:280px;
+    left:320px;
+}
+
+#Q{
+    position: absolute;
+    top:360px;
+    left:360px;
+}
+
+#R{
+    position: absolute;
+    top:280px;
+    left:400px;
+}
+
+#S{
+    position: absolute;
+    top:280px;
+    left:520px;
+}
+
+#T{
+    position: absolute;
+	left:0;
+    top:440px;
+}
+
+#U{
+    position: absolute;
+    top:440px;
+    left:160px;
+}
+
+#V{
+    position: absolute;
+    top:440px;
+    left:320px;
+}
+
+#W{
+    position: absolute;
+    top:440px;
+    left:400px;
+}
+
+#X{
+    position: absolute;
+    top:480px;
+    left:440px;
+}
+
+#Y{
+    position: absolute;
+    top:440px;
+    left:480px;
+}
+
+#Z{
+    position: absolute;
+    top:480px;
+    left:520px;
+}
+
+#_{
+    position: absolute;
+    top:440px;
+    left:560px;
+	color: #BD8D46;
+}

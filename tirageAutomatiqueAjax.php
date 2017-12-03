@@ -20,6 +20,7 @@ if (strlen($tirage) < 7){
         $req = $pdo -> prepare("UPDATE lettres SET nombreRestant = nombreRestant - 1 WHERE lettre = :nouvelleLettreTiree");
         $req -> bindParam(':nouvelleLettreTiree', $nouvelleLettreTiree, PDO::PARAM_STR);
         $req -> execute();
+        $rep[$nouvelleLettreTiree] = $_SESSION['lettres'][$nouvelleLettreTiree];
     }
     $tirage .= $nouveauTirage;
     $_SESSION['tirage'] = $tirage;

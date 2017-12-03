@@ -1,387 +1,259 @@
-/*RESET*/
-*{
-	box-sizing:border-box;
+	main{
+	padding: 15px;
 }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	/*font: inherit;*/
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-/*ol, ul {
-	list-style: none;
-}*/
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+#connexion{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 100px;
+    padding-bottom: 30px;
+    background: #f9f9f9;
 }
 
+h1{
+	font-size: 3em;
+	font-weight: bold;
+	text-align: center;
+}
 
-/*fin de reset*/
-/*----------------------------------------------------*/
-
-main{
-    margin : 15px 0;
+h2{
+	margin: 20px;
+	text-align: center;
+	font-weight: bold;
 }
 
 table{
-    margin: auto;
-    border-collapse: collapse;
-}
-
-#table{
-    margin-left: 20px;
+	margin: auto;
+	border-collapse: collapse;
 }
 
 th, .entete{
-    text-align: center;
-    font-size: 1.5em;
+	text-align: center;
+	font-size: 1.5em;
+}
+
+#newPartie{
+	margin-top: 15px;
 }
 
 .case{
-    width: 40px;
-    height: 40px;
+	width: 40px;
+	height: 40px;
 }
 
 .position{
-    font-size: .7em;
-    text-align: center;
-    border:6px solid black;
+	font-size: .6em;
+	text-align: center;
+	border:4px solid black;
 }
 
 .lettre-double{
-    background: lightblue;
-}
-
-.case-valeur.lettre-double:after{
-    content: "lettre compte double";
+	background: lightblue;
 }
 
 .lettre-triple{
-    background: darkblue;
-}
-
-.case-valeur.lettre-triple:after{
-    color:white;
-    content: "lettre compte triple";
+	background: darkblue;
 }
 
 .mot-double, .case-centre{
-    background: pink;
-}
-
-.case-valeur.case-centre:after{
-    font-family: 'Glyphicons Halflings';
-    content: "\e006";
-    font-size: 2em;
-}
-
-.case-valeur.mot-double:after{
-    content: "mot compte double";
+	background: pink;
 }
 
 .mot-triple{
-    background: red;
+	background: red;
+}
+
+.case-valeur.lettre-double:after{
+	content: "lettre compte double";
+}
+
+.case-valeur.lettre-triple:after{
+	color:white;
+	content: "lettre compte triple";
+}
+
+.case-valeur.mot-double:after{
+	content: "mot compte double";
 }
 
 .case-valeur.mot-triple:after{
-    content: "mot compte triple";
+	content: "mot compte triple";
 }
 
 .autre-case{
-    background: green;
+	background: green;
 }
 
 .cadre-blanc{
-    border: 5px solid white;
+	border: 5px solid white;
 }
 
-/*.cadre-noir{
-    border: 5px solid black;
-}*/
+.cadre-noir{
+	border: 5px solid black;
+}
 
 #legende {
-    margin-top: 30px;
+	margin-top: 30px;
 }
 
-
 .inline-block{
-    display: inline-block;
+	display: inline-block;
 }
 
 p{
-    font-size: 2em;
+	font-size: 2em;
 }
 
 p span{
-    font-size: 1.5em;
-    line-height: 1.5em;
-}
-
-.def{
-    font-size: .8em;
-    text-align: center;
+	font-size: 1.5em;
+	line-height: 1.5em;
 }
 
 .lettres{
-    font-size: 1.5em;
+	font-size: 1.5em;
 }
 
 .bold{
-    font-weight: bold;
+	font-weight: bold;
 }
 
 #lettres{
-    margin-top: 60px;
+	margin-top: 60px;
+}
+
+#ligneTirage{
+	margin-top: 15px;
 }
 
 #afficheTirage{
-    margin: 30px;
-    text-align:center;
-}
-
-#boutonsTirage{
-    margin: 50px;
+	margin: 30px;
+	text-align:center;
 }
 
 .lettre{
-    background: #BD8D46;
-    text-align: center;
-    font-size: 2em;
-    line-height: 40px;
-    font-weight: bold;
-    border: 1px solid silver;
-    padding: 0;
+	background: #BD8D46;
+	text-align: center;
+	font-size: 2em;
+	line-height: 1em;
+	font-weight: bold;
+	border: 1px solid silver;
+	padding: 0;
 }
 
 .d{
-    width: 200px;
+	width: 200px;
 }
 
 .b{
-    border: 1px solid black;
-    text-align: center;
+	border: 1px solid black;
+	text-align: center;
 }
 
 .m{
-    margin-left: 10px;
+	margin-left: 10px;
 }
 
 #plateau {
-    margin-bottom: 30px;
+	margin-bottom: 30px;
+}
+
+#plateau th{
+	padding-right: 5px;
 }
 
 #scrabble{
-	margin-top: 20px;
+	margin: 20px;
+	padding: 30px 0;
+	border: 5px solid green;
+	width:800px;
+	background: #888;
+
+}
+
+#scrabble table{
+	margin:0;
+}
+
+#scores p{
+	font-size: 1em;
 }
 
 .blanc{
-    color: #BD8D46;
-}
-
-.clear{
-    clear: both;
-}
-
-.lettres-reserve{
-    float: left;
-}
-
-#ligne-reserve{
-    position:relative;
-	margin-top: 80px;
-}
-
-#A{
-    position: absolute;
-    top:0;
-    left:0;
-}
-
-#B{
-    position: absolute;
-    top:0;
-    left:160px;
-}
-
-#C{
-    position: absolute;
-    top:80px;
-    left:200px;
-}
-
-#D{
-    position: absolute;
-    left:320px;
-}
-
-#E{
-    position: absolute;
-    left:400px;
-}
-
-#F{
-    position: absolute;
-	left:0;
-    top:160px;
-}
-
-#G{
-    position: absolute;
-    top:160px;
-    left:80px;
-}
-
-#H{
-    position: absolute;
-    top:160px;
-    left:160px;
-}
-
-#I{
-    position: absolute;
-    top:160px;
-    left:240px;
-}
-
-#J{
-    position: absolute;
-    top:160px;
-    left:400px;
-}
-
-#K{
-    position: absolute;
-    top:200px;
-    left:440px;
-}
-
-#L{
-    position: absolute;
-    top:160px;
-    left:480px;
-}
-
-#M{
-    position: absolute;
-	left:0;
-    top:280px;
-}
-
-#N{
-    position: absolute;
-    top:280px;
-    left:80px;
-}
-
-#O{
-    position: absolute;
-    top:280px;
-    left:200px;
-}
-
-#P{
-    position: absolute;
-    top:280px;
-    left:320px;
-}
-
-#Q{
-    position: absolute;
-    top:360px;
-    left:360px;
-}
-
-#R{
-    position: absolute;
-    top:280px;
-    left:400px;
-}
-
-#S{
-    position: absolute;
-    top:280px;
-    left:520px;
-}
-
-#T{
-    position: absolute;
-	left:0;
-    top:440px;
-}
-
-#U{
-    position: absolute;
-    top:440px;
-    left:160px;
-}
-
-#V{
-    position: absolute;
-    top:440px;
-    left:320px;
-}
-
-#W{
-    position: absolute;
-    top:440px;
-    left:400px;
-}
-
-#X{
-    position: absolute;
-    top:480px;
-    left:440px;
-}
-
-#Y{
-    position: absolute;
-    top:440px;
-    left:480px;
-}
-
-#Z{
-    position: absolute;
-    top:480px;
-    left:520px;
-}
-
-#_{
-    position: absolute;
-    top:440px;
-    left:560px;
 	color: #BD8D46;
 }
 
+.clear{
+	clear: both;
+}
+
+.lettres-reserve{
+	float: left;
+}
+
+#reserve{
+	margin-top: 10px;
+	font-size: 1em;
+	line-height: 1.7em;
+	font-weight: bold;
+}
+
+}#reserve td{
+	padding: 0 5px;
+}
+
+#reserve td:nth-child(3n){
+	font-weight: bold;
+	text-align: right;
+}
+
+#reserve td:nth-child(3n+2){
+	padding: 0 5px;
+	font-weight: bold;
+}
+
+
+#scores table{
+	width: 200px;
+}
+
+#scores th{
+	padding: 10px 0;
+}
+
+#scores th:nth-child(odd){
+	padding: 10px 0;
+	border-right: 2px solid black;
+}
+
+#scores td{
+	text-align: right;
+	padding: 5px;
+}
+
+#scores td:nth-child(odd){
+	border-right: 1px solid black;
+}
+
+#scores td:nth-child(2){
+	border-right: 2px solid black;
+}
+
 /**/
+
+th{
+	/*display:none;*/
+	font-size: 1.5em;
+	vertical-align: middle;
+}
+
+.bord{
+	border: 1px solid black;
+}
+
+.mot{
+	text-transform: uppercase;
+}
+
+#scrores table{
+	border: 2px solid black;
+}

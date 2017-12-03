@@ -26,11 +26,16 @@ function ajax(para, fich_php, reponseAttendue){
     };
 }
 
+// nouvelle partie
+$('#newPartie').on('click', function(){
+    ajax('', 'newPartieAjax.php', false);
+    window.location.reload();
+});
+
 var isLettreChoisie = false;
 function ecouteurChoix(elt){
     if (!isLettreChoisie){
         isLettreChoisie = true;
-
 
         // positionner une lettre lettre choisie du tirage
         var lettreChoisie = '';
@@ -59,28 +64,25 @@ function ecouteurChoix(elt){
 
 // $(document).ready(function() {
 
-// nouvelle partie
-$('#newPartie').on('click', function(){
-    ajax('', 'newPartieAjax.php', false);
-    window.location.reload();
+// choix d'une lettre de réserve
+$('.reserve').on('click', function(e){
+    lettreChoisie = e.currentTarget.childNodes[0].data;
+    var parameters = "lettreChoisie=" + lettreChoisie;
+    ajax(parameters, 'uneLettreTireeAjax.php', true);
 });
 
-// choix d'une lettre de réserve
-// $('.reserve').on('click', function(e){
-//     lettreChoisie = e.currentTarget.childNodes[0].data;
-//     var parameters = "lettreChoisie=" + lettreChoisie;
-//     ajax(parameters, 'uneLettreTireeAjax.php', true);
-// });
-
-// choix d'une lettre de réserve
+// choix de renouveller le tirage
 $('#vider').on('click', function(e){
     ajax('', 'videTirageAjax.php', true);
+    ajax('', 'tirageAutomatiqueAjax.php', true);
 });
 
 // tirage automatique
 $('#NouveauTirage').on('click', function(e){
     ajax('', 'tirageAutomatiqueAjax.php', true);
 });
+
+
 
 // ================ fin ajax ===============================
 
