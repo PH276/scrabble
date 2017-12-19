@@ -23,7 +23,6 @@ if (isset($_GET['action']) && $_GET['action']=='deconnexion'){
 // }
 //
 if (!empty($_POST)){
-    debug($_POST);
 
     // verification pseudo
     if (!empty($_POST['prenom']) && !empty($_POST['mdp'])){
@@ -40,7 +39,13 @@ if (!empty($_POST)){
                         $_SESSION['joueur'][$key] = $val;
                     }
                 }
-                // debug($_SESSION);
+                // $_SESSION['tirage'] = '';
+                // $_SESSION['jeu'] = array();
+                // $_SESSION['joueurs'] = array();
+                // $_SESSION['joueurs'][0]['joue'] = false;
+                // $_SESSION['joueurs'][1]['joue'] = false;
+                // $_SESSION['tour_passe'] = false;
+                // $_SESSION['tour'] = 0;
                 header("location:index.php");
             }
             else{
@@ -88,6 +93,3 @@ require_once ('inc/head.inc.php');
         </div><!-- fin <div class="col-md-4 col-mad-offset-4"> -->
         </div><!-- fin <div class="row">         -->
         </div><!-- fin     <div class="container"> -->
-
-
-            <?php //require_once ('inc/footer.inc.php'); ?>

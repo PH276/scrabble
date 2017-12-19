@@ -14,8 +14,6 @@ function debug($tab){
 	echo '</div>';
 }
 
-// paramètres de traitement d'une table en fonction de celle choisie
-
 // fonction pour voir si un utilisateur est connecté:
 function userConnecte(){
 	if(isset($_SESSION['joueur'])){
@@ -37,3 +35,26 @@ function userAdmin(){
 	}
 }
 // Si l'utilisateur est connecté... et en plus si son statut c'est 1 alors il a les droits d'admin et pourra accéder au backoffice.
+
+// mise à zéro du tirage
+function videTirage($pdo){
+	$req = $pdo -> query("UPDATE infos SET info='' WHERE info_type='tirage'");
+	$req -> execute();
+}
+
+// verification d'un mot proposé
+// function verifMot($motpropose, $position, $sens, $tirage, $pdo){
+//
+// 	for ($i = 0 ; $i < strlen($motpropose) ; $i++){
+// 		$lettreMot = substring($motpropose, $i, 1);
+// 		if
+// 		$req = $pdo->query("SELECT lettre FROM jeu WHERE position=$lettreMot");
+// 		$lettreJeu = $req->fetch();
+// 			if ($lettreMot == $lettreJeu['lettre'] && ){
+//
+// 			}else {
+// 				$lettreTirage
+// 			}
+//
+// 	}
+// }

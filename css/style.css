@@ -1,13 +1,6 @@
-	main{
+/*pge index*/
+main{
 	padding: 15px;
-}
-
-#connexion{
-    border: 1px solid black;
-    border-radius: 10px;
-    margin-top: 100px;
-    padding-bottom: 30px;
-    background: #f9f9f9;
 }
 
 h1{
@@ -32,13 +25,59 @@ th, .entete{
 	font-size: 1.5em;
 }
 
-#newPartie{
-	margin-top: 15px;
+/*page connexion */
+#connexion{
+	border: 1px solid black;
+	border-radius: 10px;
+	margin-top: 100px;
+	padding-bottom: 30px;
+	background: #f9f9f9;
+}
+/*==========================================*/
+
+#scrabble{
+	margin: 10px;
+	/*padding: 30px 0;*/
+	border: 5px solid green;
+	min-width:720px;
+	background: #888;
+
 }
 
-.case{
-	width: 40px;
-	height: 40px;
+#reserve{
+	margin-top: 10px;
+	font-size: 1em;
+	line-height: 1.7em;
+	font-weight: bold;
+}
+
+}#reserve td{
+	padding: 0 5px;
+}
+
+#reserve td:nth-child(3n){
+	font-weight: bold;
+	text-align: right;
+}
+
+#reserve td:nth-child(3n+2){
+	padding: 0 5px;
+	font-weight: bold;
+}
+
+#plateau {
+	margin:0;
+	margin-bottom: 30px;
+	min-width: 640px;
+}
+
+#plateau th{
+	/*padding-right: 5px;*/
+}
+
+.case, tbody th{
+	width: 2.5vw;
+	height: 2.5vw;
 }
 
 .position{
@@ -77,6 +116,7 @@ th, .entete{
 }
 
 .case-valeur.mot-triple:after{
+	color:white;
 	content: "mot compte triple";
 }
 
@@ -92,9 +132,30 @@ th, .entete{
 	border: 5px solid black;
 }
 
-#legende {
-	margin-top: 30px;
+/*bouton Nouvelle partie*/
+#newPartie{
+	margin: 10px auto;
 }
+
+/*ligne tirage des lettes piochées*/
+#ligne-tirage{
+	border: 1px solid;
+	border-radius: 5px;
+	padding: 5px;
+	margin: 10px 0;
+}
+
+#proposition{
+	border: 1px solid;
+	border-radius: 5px;
+	padding: 10px 30px;
+
+}
+
+.lettres{
+	font-size: 1.5em;
+}
+
 
 .inline-block{
 	display: inline-block;
@@ -109,20 +170,12 @@ p span{
 	line-height: 1.5em;
 }
 
-.lettres{
-	font-size: 1.5em;
-}
-
-.bold{
+.mot-retenu, .bold{
 	font-weight: bold;
 }
 
 #lettres{
 	margin-top: 60px;
-}
-
-#ligneTirage{
-	margin-top: 15px;
 }
 
 #afficheTirage{
@@ -153,64 +206,11 @@ p span{
 	margin-left: 10px;
 }
 
-#plateau {
-	margin-bottom: 30px;
+#scores{
+	border: 1px solid;
+	border-radius: 5px;
+	padding-bottom: 10px;
 }
-
-#plateau th{
-	padding-right: 5px;
-}
-
-#scrabble{
-	margin: 20px;
-	padding: 30px 0;
-	border: 5px solid green;
-	width:800px;
-	background: #888;
-
-}
-
-#scrabble table{
-	margin:0;
-}
-
-#scores p{
-	font-size: 1em;
-}
-
-.blanc{
-	color: #BD8D46;
-}
-
-.clear{
-	clear: both;
-}
-
-.lettres-reserve{
-	float: left;
-}
-
-#reserve{
-	margin-top: 10px;
-	font-size: 1em;
-	line-height: 1.7em;
-	font-weight: bold;
-}
-
-}#reserve td{
-	padding: 0 5px;
-}
-
-#reserve td:nth-child(3n){
-	font-weight: bold;
-	text-align: right;
-}
-
-#reserve td:nth-child(3n+2){
-	padding: 0 5px;
-	font-weight: bold;
-}
-
 
 #scores table{
 	width: 200px;
@@ -230,13 +230,27 @@ p span{
 	padding: 5px;
 }
 
-#scores td:nth-child(odd){
+#scores td:nth-child(3n+2){
+	border-left: 1px solid black;
 	border-right: 1px solid black;
 }
 
-#scores td:nth-child(2){
+#scores td:nth-child(3){
 	border-right: 2px solid black;
 }
+
+.blanc{
+	color: #BD8D46;
+}
+
+.clear{
+	clear: both;
+}
+
+.lettres-reserve{
+	float: left;
+}
+
 
 /**/
 
@@ -252,8 +266,4 @@ th{
 
 .mot{
 	text-transform: uppercase;
-}
-
-#scrores table{
-	border: 2px solid black;
 }
