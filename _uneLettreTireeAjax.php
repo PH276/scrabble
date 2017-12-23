@@ -10,6 +10,8 @@ if (strlen($_SESSION['tirage']) < 7){
     if ($_SESSION['lettres'][$lettreChoisie] > 0){
         --$_SESSION['lettres'][$lettreChoisie];
 
+
+
         $_SESSION['tirage'] .= $lettreChoisie;
 
         // enregistrement du tirage en base de données

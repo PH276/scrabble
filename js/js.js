@@ -1,3 +1,13 @@
+$(document).ready(function() {
+    $('#bg').on('click', function(e){
+        $('#lettres-reserve').toggle('hidden');
+    });
+
+    $('#bd').on('click', function(e){
+        $('#scores').toggle('hidden');
+    });
+});
+
 // $(document).ready(function() {
     // $('.choix').on('click', function(e){
     //     // console.log(e.currentTarget.innerHTML);

@@ -39,7 +39,7 @@ th, .entete{
 	margin: 10px;
 	/*padding: 30px 0;*/
 	border: 5px solid green;
-	min-width:720px;
+	/* min-width:720px; */
 	background: #888;
 
 }
@@ -51,7 +51,7 @@ th, .entete{
 	font-weight: bold;
 }
 
-}#reserve td{
+#reserve td{
 	padding: 0 5px;
 }
 
@@ -68,16 +68,20 @@ th, .entete{
 #plateau {
 	margin:0;
 	margin-bottom: 30px;
-	min-width: 640px;
+	/* min-width: 640px; */
 }
 
 #plateau th{
 	/*padding-right: 5px;*/
 }
 
+#ligne-tirage .row{
+	padding: 5px;
+}
+
 .case, tbody th{
-	width: 2.5vw;
-	height: 2.5vw;
+	width: 35px;
+	height: 35px;
 }
 
 .position{
@@ -245,6 +249,28 @@ p span{
 
 .clear{
 	clear: both;
+}
+
+#lettres-reserve{
+	position: fixed;
+	border: 1px solid;
+	border-radius: 5px;
+	z-index: 1000;
+	background: white;
+	display:none;
+}
+
+#scores{
+	position: fixed;
+	width: 30%;
+	margin: 0 35%;
+	top:50px;
+	right: 0;
+	border: 1px solid;
+	border-radius: 5px;
+	z-index: 1000;
+	background: white;
+	display:none;
 }
 
 .lettres-reserve{
