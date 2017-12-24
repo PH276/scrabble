@@ -253,11 +253,14 @@ p span{
 
 #lettres-reserve{
 	position: fixed;
+	top:0;
+	left:0;
 	border: 1px solid;
-	border-radius: 5px;
-	z-index: 1000;
+	z-index: 10;
 	background: white;
 	display:none;
+	padding-bottom: 5px;
+	margin: 5px;
 }
 
 #scores{
@@ -266,18 +269,46 @@ p span{
 	margin: 0 35%;
 	top:50px;
 	right: 0;
+	left:0;
 	border: 1px solid;
 	border-radius: 5px;
-	z-index: 1000;
+	z-index: 10;
 	background: white;
 	display:none;
+}
+
+#ferme-reserve{
+	border: 1px solid;
+	position: absolute;
+	right:-31px;
+	top:0;
+	z-index: 20;
+	/* font-size: 2em; */
+	padding: 10px;
+}
+
+#ferme-score{
+	position: absolute;
+	right:-1px;
+	top:-1px;
+	z-index: 20;
+	font-size: 2em;
+	padding: 10px;
+}
+
+.ferme:hover{
+	cursor: pointer;
+	background: red;
+	color: white;
 }
 
 .lettres-reserve{
 	float: left;
 }
 
-
+.choix:hover{
+	cursor: pointer;
+}
 /**/
 
 th{

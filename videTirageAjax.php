@@ -17,6 +17,6 @@ include_once('inc/videTirage.inc.php');
 $_SESSION['tirage'] = '';
 
 $rep['msg'] = '';
-$rep['tirage'] = '';
+// $rep['tirage'] = '';
 
 echo json_encode($rep);

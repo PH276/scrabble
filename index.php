@@ -60,6 +60,11 @@ $resultats = $req -> fetchAll(PDO::FETCH_ASSOC);
 
 $_SESSION['tour'] = $req->rowcount() + 1;
 
+if ($_SESSION['joueur']['id'] == 0){
+    $_SESSION['tirage1'] = $_SESSION['tirage'];
+}else{
+    $_SESSION['tirage2'] = $_SESSION['tirage'];
+}
 // debug($_SESSION);
 
 // }
@@ -79,13 +84,13 @@ include('inc/head.inc.php');
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 text-center">
+        <div class="col-md-4 text-center">
             <button type="button" id="bg" class="btn btn-info">Lettres restantes</button>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h1><?= strtoupper('scrabble')  ?></h1>
         </div>
-        <div class="col-md-3 text-center">
+        <div class="col-md-4 text-center">
             <button type="button" id="bd" class="btn btn-info">Score</button>
 
         </div>
@@ -120,14 +125,6 @@ include('inc/head.inc.php');
             <div class="row" id="ligne-tirage">
                 <div class="row">
 
-                    <div class="col-md-6">
-                        <button class="btn btn-primary center-block" type="button" id="nouveauTirage">Nouvelles Lettres</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-primary" type="button" id="vider">Renouveler les lettres</button>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-md-12"><!-- affichage des lettres piochées -->
                         <?php include ('inc/tirage.inc.php'); ?><!-- préparation à l'affichage des lettres piochées -->
                         <table>
@@ -136,6 +133,12 @@ include('inc/head.inc.php');
                             </tr>
                         </table>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button class="btn btn-primary" type="button" id="vider">Renouveler les lettres</button>
+                    </div>
+
                 </div>
 
 
@@ -170,7 +173,7 @@ include('inc/head.inc.php');
                             <div class="form-group">
                                 <!-- <label>Mot : </label><span id="motPropose"></span> -->
 
-                                <input class="form-control mot" type="hidden" name="mot" required disabled value="">
+                                <input class="form-control mot" type="text" name="mot"  value="">
                             </div>
                             <div class="row">
 

@@ -14,4 +14,6 @@
             <td id="_"><?= $_SESSION['lettres']['_'] ?></td>
         </tr>
     </table>
+    <span id="ferme-reserve" class="ferme">X</span>
+
 </div>

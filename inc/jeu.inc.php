@@ -46,7 +46,17 @@
             <td id="<?= $position ?>" class="position case autre-case<?= $caseLettre ?>"><?= $lettrePlacee ?></td>
         <?php endif; ?>
     <?php endfor; ?>
+    <th><?= chr($i+65) ?></th>
 </tr>
 <?php endfor; ?>
 </tbody>
+<tfoot>
+
+    <tr>
+        <th></th>
+        <?php for ($i = 0 ; $i < 15 ; $i++) : ?>
+            <th><?= $i+1 ?></th>
+        <?php endfor; ?>
+    </tr>
+</tfoot>
 </table>

@@ -10,6 +10,7 @@ if ($_SESSION['joueur']['id'] == 0){
 }else{
     $tirage = $_SESSION['tirage2'];
 }
+
 $i = strpos($tirage, $lettreChoisie);
 $tirage = substr($tirage, 0, $i) . substr($tirage, $i+1);
 
