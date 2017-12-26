@@ -42,7 +42,7 @@ $_SESSION['jeu'] = array();
 
 // Initialisation des résultats
 $req = $pdo -> exec ("DELETE FROM resultats WHERE id_partie = '1'");
-// $req = $pdo -> exec ("INSERT INTO resultats ( id_partie, tour) VALUES ('1', '1')");
+$req = $pdo -> exec ("INSERT INTO resultats ( id_partie, tour) VALUES ('1', '1')");
 // $_SESSION['tour'] = 1;
 
 $_SESSION = array();

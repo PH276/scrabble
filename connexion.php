@@ -9,7 +9,7 @@ $pdo = new PDO("mysql:host=localhost;dbname=scrabble", 'root', '', array(
 $msg = "";
 
 require_once('inc/fonctions.inc.php');
-debug($_SESSION);
+// debug($_SESSION);
 
 $page = 'connexion';
 
@@ -35,7 +35,7 @@ if (!empty($_POST)){
 
             if ($ligne_utilisateur['mdp'] == $_POST['mdp']){ // tout est OK
                 foreach($ligne_utilisateur as $key => $val){
-                    if ($key != 'mdp'){
+                    if ($key != 'mdp' && $key != 'tirage'){
                         $_SESSION['joueur'][$key] = $val;
                     }
                 }

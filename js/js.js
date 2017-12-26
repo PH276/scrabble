@@ -35,19 +35,20 @@ $(document).ready(function() {
     var isLettreChoisie = false;
     // ================ function ecouteurChoix ===============================
     function ecouteurChoix(lettreChoisie){
-        console.log(lettreChoisie);
+        // console.log(lettreChoisie);
 
         // positionner une lettre lettre choisie du tirage
         // var positionChoisie = '';
         // choix d'une lettre
-        motPropose = $('#motPropose').html();
+        motPropose = proposition.mot.value;
+        // motPropose = $('#motPropose').html();
         // proposition = $('#proposition')[0];
-        console.log(proposition);
-        td = $('<td></td>');
-        td.html(lettreChoisie);
-        td.addClass('case lettre');
-        mot = $('#ligne-mot');
-        td.appendTo(mot);
+        // console.log(proposition);
+        // td = $('<td></td>');
+        // td.html(lettreChoisie);
+        // td.addClass('case lettre');
+        // mot = $('#ligne-mot');
+        // td.appendTo(mot);
         // console.log(td);
         //
         proposition.mot.value += lettreChoisie;
@@ -57,8 +58,9 @@ $(document).ready(function() {
         // isLettreChoisie = false;
         parameters = "lettreChoisie="+lettreChoisie;
         parameters += "&motPropose="+motPropose;
+        console.log('parameters='+parameters);
         ajax(parameters, 'lettrePourMotAjax.php', true);
-        // lettreChoisie = '';
+        // lettreChoisie = '';!!!
 
         // $('.position').on('click', function(e){
         //     isLettreChoisie = false;

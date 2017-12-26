@@ -32,7 +32,8 @@ if (strlen($tirage) < 7){
     $req -> bindParam(':info', $tirage, PDO::PARAM_STR);
     $req -> execute();
 
-    $req = $pdo -> query("UPDATE joueurs SET tirage=$tirage");
+    $req = $pdo -> query("UPDATE joueurs SET tirage='$tirage'");
+    $req -> execute();
 
 }
 

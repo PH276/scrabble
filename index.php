@@ -3,7 +3,7 @@ require_once ('inc/init.inc.php');
 if (!userConnecte()) {
     header('location:connexion.php#prenom');
 }
-debug($_SESSION);
+// debug($_SESSION);
 
 // initialisation  comme quoi les 2 joueurs n'ont pas joué dans le tour en cours
 $_SESSION['unJoueurEnAttente'] = false;
@@ -72,7 +72,7 @@ $_SESSION['tour'] = $req->rowcount() + 1;
 
 
 // récupération du tirage pour le joueur en jeu
-if ($_SESSION['joueur']['id'] == 0){
+if ($_SESSION['joueur']['id'] == 1){
     $_SESSION['joueurs'][0]['tirage'] = $joueurs[0]['tirage'];
 }else{
     $_SESSION['joueurs'][1]['tirage'] = $joueurs[1]['tirage'];
@@ -82,7 +82,7 @@ if ($_SESSION['joueur']['id'] == 0){
 
 // =====================================================================
 
-debug($_SESSION);
+// debug($_SESSION);
 
 include('inc/head.inc.php');
 ?>
@@ -178,7 +178,7 @@ include('inc/head.inc.php');
                             <!-- champ rempli automatiquement en sélectionnannant des lettres du tirages (et du jeu) -->
 
                             <div class="form-group">
-                                <!-- <label>Mot : </label><span id="motPropose"></span> -->
+                                <label>Mot : </label><span id="motPropose"></span>
 
                                 <input class="form-control mot" type="text" name="mot"  value="">
                             </div>

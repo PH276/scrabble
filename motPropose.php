@@ -1,7 +1,7 @@
 <?php
 require_once ('inc/init.inc.php');
 // enregistrement d'un mot proposé par le joueur 1
-debug($_POST);
+// debug($_POST);
 if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']) && isset($_POST['sens'])){
     if ($_SESSION['joueur']['id'] == 1){
 
@@ -44,26 +44,32 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
     }
 
     //Résultats
-    $req = $pdo -> query("SELECT * FROM resultats WHERE id_partie = 1 AND mot_joueur1 <> '' AND mot_joueur2 <> ''");
-    $resultats = $req -> fetchAll(PDO::FETCH_ASSOC);
-    $dernierTour = end($resultats);
-    if ($dernierTour != false){
+    $req = $pdo -> query("SELECT * FROM resultats WHERE id_partie = 1 AND mot_joueur1 <> '' AND mot_joueur2 <> '' ORDER BY tour DESC LIMIT 0, 1");
+    $resultats = $req -> fetch(PDO::FETCH_ASSOC);
+    debug($resultats);
+
+    if ($resultats != false){
         $_SESSION['unJoueurEnAttente'] = false;
-        extract(end($resultats));
-        debug($_SESSION);
+        // debug($resultats);
+        extract($resultats);
+        // debug($_SESSION);
         if ($_SESSION['tour'] == $tour){
 
-
-            $idJoueur = $_SESSION['joueur']['id'];
-            $_SESSION['joueurs'][$idJoueur]['tirage'] = $tirage;
-            $pdo->req("UPDATE joueurs SET tirage = '$tirage' WHERE id='$idJoueur'")
+            // $idJoueur = $_SESSION['joueur']['id'];
+            // $_SESSION['joueurs'][$idJoueur-1]['tirage'] = $tirage;
+            // $req = $pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id='$idJoueur'");
+            // $req->execute();
 
             if ($resultat_joueur1 > $resultat_joueur2){
                 $_SESSION['tirage'] = $_SESSION['joueurs'][0]['tirage'];
             }else {
                 $_SESSION['tirage'] = $_SESSION['joueurs'][1]['tirage'];
             }
-            $pdo->req("UPDATE infos SET tirage = '$_SESSION['tirage']'");
+
+            $req = $pdo->prepare("UPDATE infos SET tirage = :tirage");
+            $req->execute(array(
+                ':tirage' => $_SESSION['tirage']
+            ));
 
             ++$_SESSION['tour'];
             $_SESSION['joueurs'][0]['joue'] = false;
@@ -80,5 +86,5 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
         $_SESSION['unJoueurEnAttente'] = true;
     }
 }
-debug($_SESSION);
-// header('location:index.php');
+// debug($_SESSION);
+header('location:index.php');

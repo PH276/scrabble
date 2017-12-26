@@ -1,5 +1,5 @@
 <?php
-require_once('inc/init.inc.php');
+// require_once('inc/init.inc.php');
 // récupération du tirage de la BD en cas de nouvelle session
 $req = $pdo -> query("SELECT info FROM infos WHERE info_type='tirage'");
 $tirage = $req->fetch(PDO::FETCH_ASSOC);
@@ -49,4 +49,4 @@ include('tirageAutomatique.php');
 // echo '</pre>';
 
 
-header('location: connexion.php');
+// header('location: index.php');
