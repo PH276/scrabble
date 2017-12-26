@@ -7,7 +7,3 @@ $pdo = new PDO("mysql:host=localhost;dbname=scrabble", 'root', '', array(
 ));
 
 require_once('inc/fonctions.inc.php');
-
-if (!userConnecte()) {
-    header('location:connexion.php#prenom');
-}

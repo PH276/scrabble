@@ -25,10 +25,10 @@ function userConnecte(){
 }
 // Cette fonction nous retourne TRUE si l'utilisateur est connecté et false, s'il ne l'est pas.
 
-
 // mise à zéro du tirage
 function videTirage($pdo){
 	$req = $pdo -> query("UPDATE infos SET info='' WHERE info_type='tirage'");
+	$req = $pdo -> query("UPDATE joueurs SET tirage=''");
 	// $req -> execute();
 }
 

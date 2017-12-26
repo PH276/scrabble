@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 $pdo = new PDO("mysql:host=localhost;dbname=scrabble", 'root', '', array(
     PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
@@ -49,6 +48,7 @@ if (!empty($_POST)){
                 // $_SESSION['tour_passe'] = false;
                 // $_SESSION['tour'] = 0;
                 // print_r( $ligne_utilisateur);
+                // debug($_SESSION);
                 header("location:index.php");
             }
             else{

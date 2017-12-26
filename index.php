@@ -1,14 +1,17 @@
 <?php
 require_once ('inc/init.inc.php');
-// debug($_SESSION);
+if (!userConnecte()) {
+    header('location:connexion.php#prenom');
+}
+debug($_SESSION);
 
 // initialisation  comme quoi les 2 joueurs n'ont pas joué dans le tour en cours
 $_SESSION['unJoueurEnAttente'] = false;
 
 // cas d'une demande de nouvelle partie
-if (isset($_POST['newPartie'])){
-    header('newPartie.php');
-}
+// if (isset($_POST['newPartie'])){
+//     header('newPartie.php');
+// }
 
 
 // if (empty($_SESSION)){
@@ -16,44 +19,49 @@ if (isset($_POST['newPartie'])){
 // récupération du tirage
 
 // récupération du tirage de la BD en cas de nouvelle session
-if (!isset($_SESSION['tirage'])){
-    $req = $pdo -> query("SELECT info FROM infos WHERE info_type='tirage'");
-    $tirage = $req->fetch(PDO::FETCH_ASSOC);
-    $_SESSION['tirage'] = $tirage['info'];
-}
+// if (!isset($_SESSION['tirage'])){
+$req = $pdo -> query("SELECT info FROM infos WHERE info_type='tirage'");
+$tirage = $req->fetch(PDO::FETCH_ASSOC);
+$_SESSION['tirage'] = $tirage['info'];
+// }
 
 // récupération de la quantité des lettres restantes en cas de nouvelle session
-if (!isset($_SESSION['lettres'])){
-    $stockLettres = array();
-    $req = $pdo -> query("SELECT lettre, nombreRestant FROM lettres");
-    $lettres = $req -> fetchAll(PDO::FETCH_ASSOC);
-    foreach ($lettres as $lettre){
-        $stockLettres[$lettre['lettre']] = $lettre['nombreRestant'];
-    }
-    $_SESSION['lettres'] = $stockLettres;
+// if (!isset($_SESSION['lettres'])){
+$stockLettres = array();
+$req = $pdo -> query("SELECT lettre, nombreRestant FROM lettres");
+$lettres = $req -> fetchAll(PDO::FETCH_ASSOC);
+foreach ($lettres as $lettre){
+    $stockLettres[$lettre['lettre']] = $lettre['nombreRestant'];
 }
+$_SESSION['lettres'] = $stockLettres;
+if (strlen($tirage['info']) < 7) {
+    include('tirageAutomatique.php');
+}
+// }
 
 // récupération des lettres du jeu en cas de nouvelle session
-if (!isset($_SESSION['jeu'])){
-    $jeu = array();
-    $req = $pdo -> query("SELECT position, lettre FROM jeu");
-    $lettresJeu = $req -> fetchAll(PDO::FETCH_ASSOC);
-    foreach ($lettresJeu as $lettreJeu){
-        $jeu[$lettreJeu['position']] = $lettreJeu['lettre'];
-    }
-    $_SESSION['jeu'] = $jeu;
+// if (!isset($_SESSION['jeu'])){
+$jeu = array();
+$req = $pdo -> query("SELECT position, lettre FROM jeu");
+$lettresJeu = $req -> fetchAll(PDO::FETCH_ASSOC);
+foreach ($lettresJeu as $lettreJeu){
+    $jeu[$lettreJeu['position']] = $lettreJeu['lettre'];
 }
+$_SESSION['jeu'] = $jeu;
+// }
 
 
 // récupération de données des joueurs en cas de nouvelle session
-if (!isset($_SESSION['joueurs'])){
-    $req = $pdo -> query("SELECT prenom FROM joueurs ORDER BY id");
-    $joueurs = $req -> fetchAll(PDO::FETCH_ASSOC);
-    $_SESSION['joueurs'][0]['joue'] = false;
-    $_SESSION['joueurs'][1]['joue'] = false;
-    $_SESSION['joueurs'][0]['prenom'] = $joueurs[0]['prenom'];
-    $_SESSION['joueurs'][1]['prenom'] = $joueurs[1]['prenom'];
-}
+// if (!isset($_SESSION['joueurs'])){
+$req = $pdo -> query("SELECT prenom, tirage FROM joueurs ORDER BY id");
+$joueurs = $req -> fetchAll(PDO::FETCH_ASSOC);
+$_SESSION['joueurs'][0]['joue'] = false;
+$_SESSION['joueurs'][1]['joue'] = false;
+$_SESSION['joueurs'][0]['prenom'] = $joueurs[0]['prenom'];
+$_SESSION['joueurs'][1]['prenom'] = $joueurs[1]['prenom'];
+$_SESSION['joueurs'][0]['tirage'] = $joueurs[0]['tirage'];
+$_SESSION['joueurs'][1]['tirage'] = $joueurs[1]['tirage'];
+// }
 
 //Résultats à afficher
 $req = $pdo -> query("SELECT * FROM resultats WHERE id_partie = 1 AND mot_joueur1 <> '' AND mot_joueur2 <> ''");
@@ -68,15 +76,16 @@ $_SESSION['tour'] = $req->rowcount() + 1;
 // récupération du tirage pour le joueur en jeu
 if ($_SESSION['joueur']['id'] == 0){
     $_SESSION['tirage1'] = $_SESSION['tirage'];
+
 }else{
     $_SESSION['tirage2'] = $_SESSION['tirage'];
 }
-// debug($_SESSION);
 
 // }
 
 // =====================================================================
 
+debug($_SESSION);
 
 include('inc/head.inc.php');
 ?>
@@ -118,19 +127,14 @@ include('inc/head.inc.php');
         </div>
 
         <div class="col-md-4 col-md-offset-1">
-
-
-            <!-- affichage d'éventuelle information en cours de jeu -->
-            <!-- bouton de nouvelle partie -->
-            <!-- affichage des lettres piochées -->
             <div class="row">
-                <form action="finPartie.php" method="post">
-                    <input class="btn btn-warning center-block" type="submit" name="newPartie" value="Nouvelle partie">
-                </form>
+                <div class="col-md-12">
+                    <p class="text-center">tour : <?= $_SESSION['tour'] ?></p>
+                </div>
             </div>
             <div class="row" id="ligne-tirage">
-                <div class="row">
 
+                <div class="row">
                     <div class="col-md-12"><!-- affichage des lettres piochées -->
                         <?php include ('inc/tirage.inc.php'); ?><!-- préparation à l'affichage des lettres piochées -->
                         <table>

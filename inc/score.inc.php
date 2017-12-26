@@ -1,16 +1,15 @@
 <div id="scores">
+    <span id="ferme-score" class="ferme">X</span>
 
     <h2>Résultats</h2>
     <?php
-    // $_SESSION['total_joueur1'] = 0;
-    // $_SESSION['total_joueur2'] = 0;
     $total_joueur1 = 0;
     $total_joueur2 = 0;
     ?>
     <table>
         <thead>
             <tr>
-                <th colspan="3" class="col-droite">
+                <th colspan="3">
                     <?= (isset($_SESSION['joueurs'][0]['prenom']))?$_SESSION['joueurs'][0]['prenom']:'Joueur 1' ?>
                 </th>
                 <th colspan="3">
@@ -46,6 +45,17 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <span id="ferme-score" class="ferme">X</span>
+    <br>
+    <?php
+    // $dernierResultat = end($resultats);
+    // if ($dernierResultat != false) :
+        ?>
+
+        <div class="row">
+            <form action="finPartie.php" method="post">
+                <input class="btn btn-warning center-block" type="submit" value="Fin de la partie">
+            </form>
+        </div>
+    <?php //endif; ?>
 
 </div>

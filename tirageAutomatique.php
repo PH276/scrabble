@@ -1,7 +1,7 @@
 <?php
 // require_once ('inc/init.inc.php');
 
-$tirage = (isset($_SESSION['tirage'])?$_SESSION['tirage']:'';
+$tirage = (isset($_SESSION['tirage']))?$_SESSION['tirage']:'';
 if (strlen($tirage) < 7){
     $piocheNonMelangee = '';
     foreach ($_SESSION['lettres'] as $key => $nbLettres) {
