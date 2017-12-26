@@ -22,14 +22,17 @@ if (strlen($tirage) < 7){
         $rep[$nouvelleLettreTiree] = $_SESSION['lettres'][$nouvelleLettreTiree];
     }
     $tirage .= $nouveauTirage;
+
     $_SESSION['tirage'] = $tirage;
-    $_SESSION['tirage1'] = $tirage;
-    $_SESSION['tirage2'] = $tirage;
+    $_SESSION['joueurs'][0]['tirage'] = $tirage;
+    $_SESSION['joueurs'][1]['tirage'] = $tirage;
 
     // enregistrement du tirage en base de données
     $req = $pdo -> prepare("UPDATE infos SET info=:info WHERE info_type='tirage'");
     $req -> bindParam(':info', $tirage, PDO::PARAM_STR);
     $req -> execute();
+
+    $req = $pdo -> query("UPDATE joueurs SET tirage=$tirage");
 
 }
 

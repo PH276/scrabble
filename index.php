@@ -59,8 +59,6 @@ $_SESSION['joueurs'][0]['joue'] = false;
 $_SESSION['joueurs'][1]['joue'] = false;
 $_SESSION['joueurs'][0]['prenom'] = $joueurs[0]['prenom'];
 $_SESSION['joueurs'][1]['prenom'] = $joueurs[1]['prenom'];
-$_SESSION['joueurs'][0]['tirage'] = $joueurs[0]['tirage'];
-$_SESSION['joueurs'][1]['tirage'] = $joueurs[1]['tirage'];
 // }
 
 //Résultats à afficher
@@ -75,10 +73,9 @@ $_SESSION['tour'] = $req->rowcount() + 1;
 
 // récupération du tirage pour le joueur en jeu
 if ($_SESSION['joueur']['id'] == 0){
-    $_SESSION['tirage1'] = $_SESSION['tirage'];
-
+    $_SESSION['joueurs'][0]['tirage'] = $joueurs[0]['tirage'];
 }else{
-    $_SESSION['tirage2'] = $_SESSION['tirage'];
+    $_SESSION['joueurs'][1]['tirage'] = $joueurs[1]['tirage'];
 }
 
 // }

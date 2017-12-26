@@ -6,19 +6,17 @@ $rep['msg'] = '';
 
 // retrait du tirage de la lettre ulisée
 if ($_SESSION['joueur']['id'] == 0){
-    $tirage = $_SESSION['tirage1'];
+    $tirage = $_SESSION['joueurs'][0]['tirage'];
 }else{
-    $tirage = $_SESSION['tirage2'];
+    $tirage = $_SESSION['joueurs'][1]['tirage'];
 }
 
 $i = strpos($tirage, $lettreChoisie);
 $tirage = substr($tirage, 0, $i) . substr($tirage, $i+1);
 
-if ($_SESSION['joueur']['id'] == 0){
-    $_SESSION['tirage1'] = $tirage;
-}else{
-    $_SESSION['tirage2'] = $tirage;
-}
+$idJoueur = $_SESSION['joueur']['id'];
+$_SESSION['joueurs'][$idJoueur]['tirage'] = $tirage;
+$pdo->req("UPDATE joueurs SET tirage = '$tirage' WHERE id='$idJoueur'")
 
 $rep['tirage'] = '';
 

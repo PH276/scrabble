@@ -53,11 +53,18 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
         debug($_SESSION);
         if ($_SESSION['tour'] == $tour){
 
+
+            $idJoueur = $_SESSION['joueur']['id'];
+            $_SESSION['joueurs'][$idJoueur]['tirage'] = $tirage;
+            $pdo->req("UPDATE joueurs SET tirage = '$tirage' WHERE id='$idJoueur'")
+
             if ($resultat_joueur1 > $resultat_joueur2){
-                $_SESSION['tirage'] = $_SESSION['tirage1'];
+                $_SESSION['tirage'] = $_SESSION['joueurs'][0]['tirage'];
             }else {
-                $_SESSION['tirage'] = $_SESSION['tirage2'];
+                $_SESSION['tirage'] = $_SESSION['joueurs'][1]['tirage'];
             }
+            $pdo->req("UPDATE infos SET tirage = '$_SESSION['tirage']'");
+
             ++$_SESSION['tour'];
             $_SESSION['joueurs'][0]['joue'] = false;
             $_SESSION['joueurs'][1]['joue'] = false;

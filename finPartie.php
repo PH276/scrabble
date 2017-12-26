@@ -13,8 +13,6 @@ require_once('inc/init.inc.php');
 videTirage($pdo);
 $rep['msg'] = '';
 unset($_SESSION['tirage']);
-unset($_SESSION['tirage1']);
-unset($_SESSION['tirage2']);
 
 
 // MAJ pour le nombre de lettres restantes
