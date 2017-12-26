@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 $pdo = new PDO("mysql:host=localhost;dbname=scrabble", 'root', '', array(
     PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
@@ -8,15 +9,15 @@ $pdo = new PDO("mysql:host=localhost;dbname=scrabble", 'root', '', array(
 
 $msg = "";
 
-
 require_once('inc/fonctions.inc.php');
+debug($_SESSION);
 
 $page = 'connexion';
 
-if (isset($_GET['action']) && $_GET['action']=='deconnexion'){
-    session_destroy();
-    header('location:index.php');
-}
+// if (isset($_GET['action']) && $_GET['action']=='deconnexion'){
+//     session_destroy();
+//     header('location:index.php');
+// }
 
 // if (userAdmin()){
 //     header('location:utilisateur.php');
@@ -39,7 +40,7 @@ if (!empty($_POST)){
                         $_SESSION['joueur'][$key] = $val;
                     }
                 }
-                $_SESSION['joueurs'][$ligne_utilisateur['id']-1]['prenom'] = $ligne_utilisateur['prenom'];
+                // $_SESSION['joueurs'][$ligne_utilisateur['id']-1]['prenom'] = $ligne_utilisateur['prenom'];
                 // $_SESSION['tirage'] = '';
                 // $_SESSION['jeu'] = array();
                 // $_SESSION['joueurs'] = array();
@@ -47,7 +48,7 @@ if (!empty($_POST)){
                 // $_SESSION['joueurs'][1]['joue'] = false;
                 // $_SESSION['tour_passe'] = false;
                 // $_SESSION['tour'] = 0;
-                print_r( $ligne_utilisateur);
+                // print_r( $ligne_utilisateur);
                 header("location:index.php");
             }
             else{

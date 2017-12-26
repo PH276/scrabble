@@ -13,14 +13,14 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
 
         $_SESSION['joueurs'][0]['joue'] = true;
 
-        if ($_SESSION['joueurs'][1]['joue']){
-            ++$_SESSION['tour'];
-            $_SESSION['joueurs'][0]['joue'] = false;
-            $_SESSION['joueurs'][1]['joue'] = false;
-            $req = $pdo -> prepare ("INSERT INTO resultats ( id_partie, tour) VALUES ('1', :tour)");
-            $req -> bindParam (':tour', $_SESSION['tour'], PDO::PARAM_INT);
-            $req -> execute();
-        }
+        // if ($_SESSION['joueurs'][1]['joue']){
+        //     ++$_SESSION['tour'];
+        //     $_SESSION['joueurs'][0]['joue'] = false;
+        //     $_SESSION['joueurs'][1]['joue'] = false;
+        //     $req = $pdo -> prepare ("INSERT INTO resultats ( id_partie, tour) VALUES ('1', :tour)");
+        //     $req -> bindParam (':tour', $_SESSION['tour'], PDO::PARAM_INT);
+        //     $req -> execute();
+        // }
 
     }
     // enregistrement d'un mot proposé par le joueur 2
@@ -33,18 +33,45 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
 
         $_SESSION['joueurs'][1]['joue'] = true;
 
-        if ($_SESSION['joueurs'][0]['joue']){
+        // if ($_SESSION['joueurs'][0]['joue']){
+        //     ++$_SESSION['tour'];
+        //     $_SESSION['joueurs'][0]['joue'] = false;
+        //     $_SESSION['joueurs'][1]['joue'] = false;
+        //     $req = $pdo -> prepare ("INSERT INTO resultats ( id_partie, tour) VALUES ('1', :tour)");
+        //     $req -> bindParam (':tour', $_SESSION['tour'], PDO::PARAM_INT);
+        //     $req -> execute();
+        // }
+    }
+
+    //Résultats
+    $req = $pdo -> query("SELECT * FROM resultats WHERE id_partie = 1 AND mot_joueur1 <> '' AND mot_joueur2 <> ''");
+    $resultats = $req -> fetchAll(PDO::FETCH_ASSOC);
+    $dernierTour = end($resultats);
+    if ($dernierTour != false){
+        $_SESSION['unJoueurEnAttente'] = false;
+        extract(end($resultats));
+        debug($_SESSION);
+        if ($_SESSION['tour'] == $tour){
+
+            if ($resultat_joueur1 > $resultat_joueur2){
+                $_SESSION['tirage'] = $_SESSION['tirage1'];
+            }else {
+                $_SESSION['tirage'] = $_SESSION['tirage2'];
+            }
             ++$_SESSION['tour'];
             $_SESSION['joueurs'][0]['joue'] = false;
             $_SESSION['joueurs'][1]['joue'] = false;
             $req = $pdo -> prepare ("INSERT INTO resultats ( id_partie, tour) VALUES ('1', :tour)");
             $req -> bindParam (':tour', $_SESSION['tour'], PDO::PARAM_INT);
             $req -> execute();
-        }
-    }
+            include('tirageAutomatique.php');
 
-    //Résultats
-    $req = $pdo -> query("SELECT * FROM resultats WHERE id_partie = 1 AND mot_joueur1 <> '' AND mot_joueur2 <> ''");
-    $resultats = $req -> fetchAll(PDO::FETCH_ASSOC);
+        }
+
+    }
+    else {
+        $_SESSION['unJoueurEnAttente'] = true;
+    }
 }
-header('location:index.php');
+debug($_SESSION);
+// header('location:index.php');

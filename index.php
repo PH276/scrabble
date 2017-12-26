@@ -2,27 +2,27 @@
 require_once ('inc/init.inc.php');
 // debug($_SESSION);
 
+// initialisation  comme quoi les 2 joueurs n'ont pas joué dans le tour en cours
+$_SESSION['unJoueurEnAttente'] = false;
 
+// cas d'une demande de nouvelle partie
 if (isset($_POST['newPartie'])){
-    header('finPartie.php');
+    header('newPartie.php');
 }
 
-// A l'arrivée sur cette page, récupération des données de la BDD, en cas de session inexistante
-// echo '<pre>';
-// print_r ($_SESSION);
-// echo '</pre>';
 
 // if (empty($_SESSION)){
 
 // récupération du tirage
 
+// récupération du tirage de la BD en cas de nouvelle session
 if (!isset($_SESSION['tirage'])){
     $req = $pdo -> query("SELECT info FROM infos WHERE info_type='tirage'");
     $tirage = $req->fetch(PDO::FETCH_ASSOC);
     $_SESSION['tirage'] = $tirage['info'];
 }
 
-// récupération de la quantité des lettres restantes
+// récupération de la quantité des lettres restantes en cas de nouvelle session
 if (!isset($_SESSION['lettres'])){
     $stockLettres = array();
     $req = $pdo -> query("SELECT lettre, nombreRestant FROM lettres");
@@ -33,7 +33,7 @@ if (!isset($_SESSION['lettres'])){
     $_SESSION['lettres'] = $stockLettres;
 }
 
-// récupération des lettres du jeu
+// récupération des lettres du jeu en cas de nouvelle session
 if (!isset($_SESSION['jeu'])){
     $jeu = array();
     $req = $pdo -> query("SELECT position, lettre FROM jeu");
@@ -44,6 +44,8 @@ if (!isset($_SESSION['jeu'])){
     $_SESSION['jeu'] = $jeu;
 }
 
+
+// récupération de données des joueurs en cas de nouvelle session
 if (!isset($_SESSION['joueurs'])){
     $req = $pdo -> query("SELECT prenom FROM joueurs ORDER BY id");
     $joueurs = $req -> fetchAll(PDO::FETCH_ASSOC);
@@ -51,15 +53,19 @@ if (!isset($_SESSION['joueurs'])){
     $_SESSION['joueurs'][1]['joue'] = false;
     $_SESSION['joueurs'][0]['prenom'] = $joueurs[0]['prenom'];
     $_SESSION['joueurs'][1]['prenom'] = $joueurs[1]['prenom'];
-    # code...
 }
 
-//Résultats
+//Résultats à afficher
 $req = $pdo -> query("SELECT * FROM resultats WHERE id_partie = 1 AND mot_joueur1 <> '' AND mot_joueur2 <> ''");
 $resultats = $req -> fetchAll(PDO::FETCH_ASSOC);
 
+// enregistrement du tour en cours
 $_SESSION['tour'] = $req->rowcount() + 1;
 
+// $_SESSION['unJoueurEnAttente'] = true;
+
+
+// récupération du tirage pour le joueur en jeu
 if ($_SESSION['joueur']['id'] == 0){
     $_SESSION['tirage1'] = $_SESSION['tirage'];
 }else{
