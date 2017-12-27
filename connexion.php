@@ -72,27 +72,29 @@ require_once ('inc/head.inc.php');
 <!--  contenu HTML  -->
 <div class="container">
     <div class="row">
-        <div id="connexion" class="col-md-4 col-md-offset-4">
-            <h1>Connexion</h1>
+        <div class="col-md-4 col-md-offset-4">
+            <div id="connexion">
+                <h1>Connexion</h1>
 
-            <form method="post" action="">
-                <?= $msg; ?>
-
-                <div class="form-group">
+                <form method="post" action="">
+                    <?= $msg; ?>
 
                     <div class="form-group">
-                        <label for="prenom">Prénom</label>
-                        <input class="form-control" type="text" id="prenom" name="prenom" value="<?= (isset($_POST['prenom']))?$_POST['prenom']:'' ?>" >
+
+                        <div class="form-group">
+                            <label for="prenom">Prénom</label>
+                            <input class="form-control" type="text" id="prenom" name="prenom" value="<?= (isset($_POST['prenom']))?$_POST['prenom']:'' ?>" >
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="mdp">Mot de passe</label>
-                    <input class="form-control" type="password" id="mdp" name="mdp"  value="<?= (isset($mdp))?$mdp:'' ?>">
-                </div>
+                    <div class="form-group">
+                        <label for="mdp">Mot de passe</label>
+                        <input class="form-control" type="password" id="mdp" name="mdp"  value="<?= (isset($mdp))?$mdp:'' ?>">
+                    </div>
 
-                <input type="submit" class="btn btn-primary center-block" value="Se connecter">
-            </form>
-        </div><!-- fin <div class="col-md-4 col-mad-offset-4"> -->
-        </div><!-- fin <div class="row">         -->
-        </div><!-- fin     <div class="container"> -->
+                    <input type="submit" class="btn btn-primary center-block" value="Se connecter">
+                </form>
+            </div><!-- fin <div id="connexion"> -->
+            </div><!-- fin <div class="col-md-4 col-mad-offset-4"> -->
+            </div><!-- fin <div class="row">         -->
+            </div><!-- fin     <div class="container"> -->

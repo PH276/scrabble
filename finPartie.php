@@ -1,15 +1,9 @@
 <?php
 require_once('inc/init.inc.php');
-
-// session_destroy();
-// debug($_SESSION);
 // nouvelle partie
-
-// unset($_SESSION['lettres']);
-// unset($_SESSION['tirage']);
+// debug($_SESSION);
 
 // mise à zéro du tirage
-// include('inc/videTirage.inc.php');
 videTirage($pdo);
 $rep['msg'] = '';
 unset($_SESSION['tirage']);
@@ -47,4 +41,4 @@ $req = $pdo -> exec ("INSERT INTO resultats ( id_partie, tour) VALUES ('1', '1')
 
 $_SESSION = array();
 session_destroy();
-header('location: connexion.php');
+header('location: connexion.php#prenom');

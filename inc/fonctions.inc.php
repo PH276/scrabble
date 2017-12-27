@@ -32,19 +32,16 @@ function videTirage($pdo){
 	// $req -> execute();
 }
 
-// verification d'un mot proposé
-// function verifMot($motpropose, $position, $sens, $tirage, $pdo){
-//
-// 	for ($i = 0 ; $i < strlen($motpropose) ; $i++){
-// 		$lettreMot = substring($motpropose, $i, 1);
-// 		if
-// 		$req = $pdo->query("SELECT lettre FROM jeu WHERE position=$lettreMot");
-// 		$lettreJeu = $req->fetch();
-// 			if ($lettreMot == $lettreJeu['lettre'] && ){
-//
-// 			}else {
-// 				$lettreTirage
-// 			}
-//
-// 	}
-// }
+function idJoueurEnAttente($pdo){
+	$req = $pdo -> query("SELECT mot_joueur1, mot_joueur2 FROM resultats ORDER BY tour DESC LIMIT 0, 1");
+	$derniersResultats = $req -> fetch(PDO::FETCH_ASSOC);
+	extract($derniersResultats);
+	if ($mot_joueur1 == '' && $mot_joueur2 != ''){
+		return 1;
+	} elseif ($mot_joueur1 != '' && $mot_joueur2 == ''){
+		return 2;
+	}
+
+	return 0;
+
+}

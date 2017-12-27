@@ -72,11 +72,15 @@ $_SESSION['tour'] = $req->rowcount() + 1;
 
 
 // récupération du tirage pour le joueur en jeu
-if ($_SESSION['joueur']['id'] == 1){
-    $_SESSION['joueurs'][0]['tirage'] = $joueurs[0]['tirage'];
-}else{
-    $_SESSION['joueurs'][1]['tirage'] = $joueurs[1]['tirage'];
-}
+$idJoueur = $_SESSION['joueur']['id'];
+$tirage = $_SESSION['tirage'];
+// if ($_SESSION['joueur']['id'] == 1){
+$_SESSION['joueurs'][$idJoueur - 1]['tirage'] = $tirage;
+$pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id=$idJoueur");
+// }else{
+//     $_SESSION['joueurs'][1]['tirage'] = $_SESSION['tirage'];
+//     $pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id='2'");
+// }
 
 // }
 
@@ -129,94 +133,16 @@ include('inc/head.inc.php');
                     <p class="text-center">tour : <?= $_SESSION['tour'] ?></p>
                 </div>
             </div>
-            <div class="row" id="ligne-tirage">
-
+            <?php $idJoueurEnAttente = idJoueurEnAttente($pdo); ?>
+            <?php if ($idJoueurEnAttente == 0 || $idJoueurEnAttente == $_SESSION['joueur']['id']) : ?>
+                <?php include ('panneauSaisies.php'); ?>
+            <?php else : ?>
                 <div class="row">
-                    <div class="col-md-12"><!-- affichage des lettres piochées -->
-                        <?php include ('inc/tirage.inc.php'); ?><!-- préparation à l'affichage des lettres piochées -->
-                        <table>
-                            <tr id="tirage">
-                                <?= $rep['tirage'];  ?>
-                            </tr>
-                        </table>
+                    <div id="attente">
+                        <p>Tour en attente de <?= $_SESSION['joueurs'][$idJoueurEnAttente - 1]['prenom'] ?></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <button class="btn btn-primary" type="button" id="vider">Renouveler les lettres</button>
-                    </div>
-
-                </div>
-
-
-            </div><!-- fin de la ligne des lettres piochées -->
-
-
-            <div class="row">
-
-                <div class="col-md-12">
-                    <!-- formulaire pour la proposition d'un mot -->
-                    <form method="post" id="proposition" action="motPropose.php">
-
-                        <h2>Mot proposé</h2>
-                        <?php $mot_en_attente = ($_SESSION['joueur']['id'] == 1 && $_SESSION['joueurs'][$_SESSION['joueur']['id'] - 1]['joue'])?
-                        ' disabled ':''; ?>
-                        <fieldset id="mot-propose">
-
-
-                            <table>
-                                <tbody>
-                                    <tr id="ligne-mot">
-
-                                    </tr>
-                                </tbody>
-                            </table>
-
-
-
-
-                            <!-- champ rempli automatiquement en sélectionnannant des lettres du tirages (et du jeu) -->
-
-                            <div class="form-group">
-                                <label>Mot : </label><span id="motPropose"></span>
-
-                                <input class="form-control mot" type="text" name="mot"  value="">
-                            </div>
-                            <div class="row">
-
-                                <div class="form-group col-md-4">
-                                    <label for="">Points : </label>
-                                    <input class="form-control" type="number" name="points" value="" title="Entrer le nombre de points qu'il rapporte" required >
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">Position : </label>
-                                    <input class="form-control" type="text" name="position" value="" title="position de la première lettre du mot" required>
-                                </div>
-                                <div class="form-group col-md-4">
-
-                                    <label for="">Sens : </label>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="sens" id="V" value="V" required>
-                                            Vertical
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="sens" id="H" value="H">
-                                            Horizontal
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-primary center-block" value="Valider">
-                                </div>
-                            </div>
-                        </fieldset>
-
-                    </form>
-                </div>
-            </div>
+            <?php endif; ?>
         </div><!-- fin div class="6" id="scores"> -->
 
 
