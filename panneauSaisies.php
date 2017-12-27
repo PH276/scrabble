@@ -33,13 +33,6 @@
             <fieldset id="mot-propose">
 
 
-                <table>
-                    <tbody>
-                        <tr id="ligne-mot">
-
-                        </tr>
-                    </tbody>
-                </table>
 
 
 
@@ -48,8 +41,15 @@
 
                 <div class="form-group">
                     <label>Mot : </label><span id="motPropose"></span>
+                    <table>
+                        <tbody>
+                            <tr id="ligne-mot">
 
-                    <input class="form-control mot" type="text" name="mot"  value="">
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <input class="form-control mot" type="hidden" name="mot"  value="">
                 </div>
                 <div class="row">
 
@@ -58,7 +58,7 @@
                         <input class="form-control" type="number" name="points" value="" title="Entrer le nombre de points qu'il rapporte" required >
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="">Position : </label>
+                        <label for="">Position : <span id="position"></span></label>
                         <input class="form-control" type="text" name="position" value="" title="position de la première lettre du mot" required>
                     </div>
                     <div class="form-group col-md-4">

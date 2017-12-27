@@ -3,6 +3,8 @@ require_once ('inc/init.inc.php');
 // enregistrement d'un mot proposé par le joueur 1
 // debug($_POST);
 if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']) && isset($_POST['sens'])){
+
+
     if ($_SESSION['joueur']['id'] == 1){
 
         $req = $pdo -> prepare("UPDATE resultats SET resultat_joueur1 = :points, mot_joueur1 = :mot  WHERE id_partie = '1' AND tour = :tour");
@@ -46,7 +48,7 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
     //Résultats
     $req = $pdo -> query("SELECT * FROM resultats WHERE id_partie = 1 AND mot_joueur1 <> '' AND mot_joueur2 <> '' ORDER BY tour DESC LIMIT 0, 1");
     $resultats = $req -> fetch(PDO::FETCH_ASSOC);
-    debug($resultats);
+    // debug($resultats);
 
     if ($resultats != false){
         $_SESSION['unJoueurEnAttente'] = false;

@@ -34,6 +34,7 @@ $(document).ready(function() {
 
     var isLettreChoisie = false;
     // ================ function ecouteurChoix ===============================
+    // retient une lettre choisie dans le tirage
     function ecouteurChoix(lettreChoisie){
         // console.log(lettreChoisie);
 
@@ -80,6 +81,16 @@ $(document).ready(function() {
     }
     // ================ fin function ecouteurChoix ===============================
 
+
+    // choix d'une lettre du tirage pour composer un mot à proposer
+    $('.choix').on('click', function(e){
+        $('#nouveauTirage').off('click');
+        $('#vider').off('click');
+
+
+        ecouteurChoix(e.currentTarget.innerHTML);
+    });
+
     // tirage automatique
     $('#nouveauTirage').on('click', function(e){
         ajax('', 'tirageAutomatiqueAjax.php', true);
@@ -108,16 +119,6 @@ $(document).ready(function() {
     });
 
 
-    // choix d'une lettre du tirage pour composer un mot à proposer
-    $('.choix').on('click', function(e){
-        $('#nouveauTirage').off('click');
-        $('#vider').off('click');
-
-
-        ecouteurChoix(e.currentTarget.innerHTML);
-    });
-
-
     // demande à voir les lettres restantes
     $('#bg').on('click', function(e){
         $('#lettres-reserve').show();
@@ -137,6 +138,15 @@ $(document).ready(function() {
     $('#ferme-score').on('click', function(e){
         $('#scores').hide();
     });
+});
+
+// écouteur sur les cases du jeu
+$('.position').on('click', function(e){
+    console.log(proposition.mot.value.length);
+    // if (proposition.mot.value.length() ==){
+        $('#position').html($(this)[0].id);
+    // }
+
 });
 
 

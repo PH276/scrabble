@@ -80,6 +80,10 @@ th, .entete{
 	padding: 5px;
 }
 
+#ligne-mot{
+	height: 35px;
+}
+
 #attente{
 	text-align: center;
 	border: 5px dashed orange;
@@ -156,6 +160,10 @@ th, .entete{
 	border-radius: 5px;
 	padding: 5px;
 	margin: 10px 0;
+}
+
+#position{
+	font-weight:normal;
 }
 
 #proposition{
