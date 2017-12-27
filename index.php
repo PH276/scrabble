@@ -34,9 +34,9 @@ foreach ($lettres as $lettre){
     $stockLettres[$lettre['lettre']] = $lettre['nombreRestant'];
 }
 $_SESSION['lettres'] = $stockLettres;
-if (strlen($tirage['info']) < 7) {
-    include('tirageAutomatique.php');
-}
+// if (strlen($tirage['info']) < 7) {
+//     include('tirageAutomatique.php');
+// }
 // }
 
 // récupération des lettres du jeu en cas de nouvelle session
@@ -71,18 +71,6 @@ $_SESSION['tour'] = $req->rowcount() + 1;
 // $_SESSION['unJoueurEnAttente'] = true;
 
 
-// récupération du tirage pour le joueur en jeu
-$idJoueur = $_SESSION['joueur']['id'];
-$tirage = $_SESSION['tirage'];
-// if ($_SESSION['joueur']['id'] == 1){
-$_SESSION['joueurs'][$idJoueur - 1]['tirage'] = $tirage;
-$pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id=$idJoueur");
-// }else{
-//     $_SESSION['joueurs'][1]['tirage'] = $_SESSION['tirage'];
-//     $pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id='2'");
-// }
-
-// }
 
 // =====================================================================
 
@@ -135,6 +123,24 @@ include('inc/head.inc.php');
             </div>
             <?php $idJoueurEnAttente = idJoueurEnAttente($pdo); ?>
             <?php if ($idJoueurEnAttente == 0 || $idJoueurEnAttente == $_SESSION['joueur']['id']) : ?>
+                <?php
+                // récupération du tirage pour le joueur en jeu
+                $idJoueur = $_SESSION['joueur']['id'];
+                $tirage = $_SESSION['tirage'];
+                // if ($_SESSION['joueur']['id'] == 1){
+                $_SESSION['joueurs'][$idJoueur - 1]['tirage'] = $tirage;
+                $pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id=$idJoueur");
+                // }else{
+                //     $_SESSION['joueurs'][1]['tirage'] = $_SESSION['tirage'];
+                //     $pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id='2'");
+                // }
+
+                // }
+
+
+                ?>
+
+
                 <?php include ('panneauSaisies.php'); ?>
             <?php else : ?>
                 <div class="row">
