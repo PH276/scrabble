@@ -28,15 +28,17 @@ $_SESSION['tirage'] = $tirage['info'];
 // récupération de la quantité des lettres restantes en cas de nouvelle session
 // if (!isset($_SESSION['lettres'])){
 $stockLettres = array();
-$req = $pdo -> query("SELECT lettre, nombreRestant FROM lettres");
+$req = $pdo -> query("SELECT lettre, nombreRestant, points FROM lettres");
 $lettres = $req -> fetchAll(PDO::FETCH_ASSOC);
 foreach ($lettres as $lettre){
-    $stockLettres[$lettre['lettre']] = $lettre['nombreRestant'];
+    // $stockLettres = array();
+    $stockLettres[$lettre['lettre']]['nb'] = $lettre['nombreRestant'];
+    $stockLettres[$lettre['lettre']]['pts'] = $lettre['points'];
 }
 $_SESSION['lettres'] = $stockLettres;
-// if (strlen($tirage['info']) < 7) {
-//     include('tirageAutomatique.php');
-// }
+if (strlen($tirage['info']) < 7) {
+    include('tirageAutomatique.php');
+}
 // }
 
 // récupération des lettres du jeu en cas de nouvelle session
@@ -127,17 +129,8 @@ include('inc/head.inc.php');
                 // récupération du tirage pour le joueur en jeu
                 $idJoueur = $_SESSION['joueur']['id'];
                 $tirage = $_SESSION['tirage'];
-                // if ($_SESSION['joueur']['id'] == 1){
                 $_SESSION['joueurs'][$idJoueur - 1]['tirage'] = $tirage;
                 $pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id=$idJoueur");
-                // }else{
-                //     $_SESSION['joueurs'][1]['tirage'] = $_SESSION['tirage'];
-                //     $pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id='2'");
-                // }
-
-                // }
-
-
                 ?>
 
 

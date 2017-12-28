@@ -21,7 +21,7 @@ $req = $pdo -> query("DELETE FROM jeu");
 $req -> execute();
 
 foreach ($lettres as $lettre){
-    $_SESSION['lettres'][$lettre['lettre']] = $lettre['nombreRestant'];
+    $_SESSION['lettres'][$lettre['lettre']]['nb'] = $lettre['nombreRestant'];
 }
 
 // $rep['tirage'] = '<td></td>';

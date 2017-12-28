@@ -6,9 +6,11 @@ $rep['tirage'] = '';
 $lettreTirees = $_SESSION['tirage'];
 
 for ($i = 0 ; $i < strlen($lettreTirees) ; $i++) {
-    if ((substr($lettreTirees, $i, 1) == '_')) {
-        $rep['tirage'] .= '<td class="choix case blanc lettre">'. substr($lettreTirees, $i, 1) . '</td>';
+    $lettre = substr($lettreTirees, $i, 1);
+    $pts = $_SESSION['lettres'][$lettre]['pts'];
+    if (($lettre == '_')) {
+        $rep['tirage'] .= '<td class="choix case blanc lettre">'. $lettre . '</td>';
     } else {
-        $rep['tirage'] .= '<td class="choix case lettre">' . substr($lettreTirees, $i, 1) . '</td>';
+        $rep['tirage'] .= "<td class='choix case lettre'>$lettre<span>$pts</span></td>";
     }
 }

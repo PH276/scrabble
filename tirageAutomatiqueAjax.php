@@ -5,8 +5,8 @@ $rep['msg'] = '';
 $tirage = $_SESSION['tirage'];
 if (strlen($tirage) < 7){
     $piocheNonMelangee = '';
-    foreach ($_SESSION['lettres'] as $key => $nbLettres) {
-        $piocheNonMelangee .= str_repeat ($key, $nbLettres);
+    foreach ($_SESSION['lettres'] as $key => $Lettres) {
+        $piocheNonMelangee .= str_repeat ($key, $Lettres['nb']);
     }
 
     $piocheMelangee = str_shuffle($piocheNonMelangee);
@@ -14,13 +14,13 @@ if (strlen($tirage) < 7){
 
     for ($i = 0 ; $i < strlen($nouveauTirage) ; $i++){
         $nouvelleLettreTiree = substr($nouveauTirage, $i, 1);
-        --$_SESSION['lettres'][$nouvelleLettreTiree];
+        --$_SESSION['lettres'][$nouvelleLettreTiree]['nb'];
 
         // enregistrement en BDD du nombre de lettres restantes pour la lettre choisie
         $req = $pdo -> prepare("UPDATE lettres SET nombreRestant = nombreRestant - 1 WHERE lettre = :nouvelleLettreTiree");
         $req -> bindParam(':nouvelleLettreTiree', $nouvelleLettreTiree, PDO::PARAM_STR);
         $req -> execute();
-        $rep[$nouvelleLettreTiree] = $_SESSION['lettres'][$nouvelleLettreTiree];
+        $rep[$nouvelleLettreTiree] = $_SESSION['lettres'][$nouvelleLettreTiree]['nb'];
     }
     $tirage .= $nouveauTirage;
     $_SESSION['tirage'] = $tirage;
@@ -40,10 +40,15 @@ $rep['tirage'] = '';
 $lettreTirees = $tirage;
  // onclick="ecouteurChoix(this)"
 for ($i = 0 ; $i < strlen($lettreTirees) ; $i++) {
-    if ((substr($lettreTirees, $i, 1) == '_')) {
-        $rep['tirage'] .= '<td class="choix case blanc lettre">' .  substr($lettreTirees, $i, 1) . '</td>';
+    $lettre = substr($lettreTirees, $i, 1);
+    $pts = $_SESSION['lettres'][$lettre]['pts'];
+    if (($lettre == '_')) {
+        $rep['tirage'] .= "<td class='choix case blanc lettre'>$lettre</td>";
     } else {
-        $rep['tirage'] .= '<td class="choix case lettre">' . substr($lettreTirees, $i, 1) . '</td>';
+
+
+        $rep['tirage'] .= "<td class='choix case lettre'>$lettre<span>$pts</span></td>";
+        // $rep['tirage'] .= "<td class='choix case lettre'>$lettre</td>";
     }
 }
 
