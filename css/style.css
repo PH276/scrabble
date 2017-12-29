@@ -218,7 +218,7 @@ p span{
 .lettre span{
  	letter-spacing: 0.1px;
 	position: relative;
-	right: px;
+	right: 0;
 	bottom: -12px;
 	font-weight: bolder;
 	font-size: 0.3em;
