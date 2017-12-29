@@ -37,18 +37,22 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
 
 
             if ($resultat_joueur1 > $resultat_joueur2){
-                $_SESSION['tirage'] = $_SESSION['joueurs'][0]['tirage'];
+                // $_SESSION['tirage'] = $_SESSION['joueurs'][0]['tirage'];
                 $motRretenu = $mot_joueur1;
                 $positionMot = $position_mot_joueur1;
                 $sensMot = $sens_mot_joueur1;
             }else {
-                $_SESSION['tirage'] = $_SESSION['joueurs'][1]['tirage'];
+                // $_SESSION['tirage'] = $_SESSION['joueurs'][1]['tirage'];
                 $motRretenu = $mot_joueur2;
                 $positionMot = $position_mot_joueur2;
                 $sensMot = $sens_mot_joueur2;
             }
 
-            include ('inc/positionnerMot.inc.php');
+            include('inc/positionnerMot.inc.php');
+            // ======================================================
+            // modifier le tirage en fonction du mot retenu
+            // ======================================================
+            include('inc/tirageAutomatique.inc.php');
 
             $req = $pdo->prepare("UPDATE infos SET info = :tirage WHERE info_type = 'tirage'");
             $req->execute(array(
@@ -61,7 +65,6 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
             $req = $pdo -> prepare ("INSERT INTO resultats ( id_partie, tour) VALUES ('1', :tour)");
             $req -> bindParam (':tour', $_SESSION['tour'], PDO::PARAM_INT);
             $req -> execute();
-            include('tirageAutomatique.php');
 
         }
 
@@ -71,4 +74,4 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
     }
 }
 // debug($_SESSION);
-header('location:index.php');
+// header('location:index.php');

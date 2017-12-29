@@ -24,8 +24,8 @@ if (strlen($tirage) < 7){
     }
     $tirage .= $nouveauTirage;
     $_SESSION['tirage'] = $tirage;
-    $_SESSION['tirage1'] = $tirage;
-    $_SESSION['tirage2'] = $tirage;
+    // $_SESSION['tirage1'] = $tirage;
+    // $_SESSION['tirage2'] = $tirage;
 
     // enregistrement du tirage en base de données
     $req = $pdo -> prepare("UPDATE infos SET info=:info WHERE info_type='tirage'");

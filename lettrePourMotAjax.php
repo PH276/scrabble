@@ -5,18 +5,20 @@ $motPropose = $_POST['motPropose'];
 $rep['msg'] = '';
 
 // retrait du tirage de la lettre ulisée
-if ($_SESSION['joueur']['id'] == 1){
-    $tirage = $_SESSION['joueurs'][0]['tirage'];
-}else{
-    $tirage = $_SESSION['joueurs'][1]['tirage'];
-}
+// if ($_SESSION['joueur']['id'] == 1){
+//     $tirage = $_SESSION['joueurs'][0]['tirage'];
+// }else{
+//     $tirage = $_SESSION['joueurs'][1]['tirage'];
+// }
+$tirage = $_SESSION['tirage'];
 
 $i = strpos($tirage, $lettreChoisie);
 $tirage = substr($tirage, 0, $i) . substr($tirage, $i+1);
 
 $idJoueur = $_SESSION['joueur']['id'];
-$_SESSION['joueurs'][$idJoueur-1]['tirage'] = $tirage;
-$pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id='$idJoueur'");
+$_SESSION['tirage'] = $tirage;
+// $_SESSION['joueurs'][$idJoueur-1]['tirage'] = $tirage;
+// $pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id='$idJoueur'");
 
 $rep['tirage'] = '';
 

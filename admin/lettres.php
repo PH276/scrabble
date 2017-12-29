@@ -42,16 +42,7 @@
                     <td><input type="submit" value="Valider"></td>
                 </form>
             </tr>
-
-
-
-
-
-
         <?php endforeach; ?>
     </table>
-
-
-
 </body>
 </html>

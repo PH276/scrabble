@@ -36,9 +36,9 @@ foreach ($lettres as $lettre){
     $stockLettres[$lettre['lettre']]['pts'] = $lettre['points'];
 }
 $_SESSION['lettres'] = $stockLettres;
-if (strlen($tirage['info']) < 7) {
-    include('tirageAutomatique.php');
-}
+// if (strlen($tirage['info']) < 7) {
+//     include('tirageAutomatique.php');
+// }
 // }
 
 // récupération des lettres du jeu en cas de nouvelle session
@@ -55,7 +55,8 @@ $_SESSION['jeu'] = $jeu;
 
 // récupération de données des joueurs en cas de nouvelle session
 // if (!isset($_SESSION['joueurs'])){
-$req = $pdo -> query("SELECT prenom, tirage FROM joueurs ORDER BY id");
+// $req = $pdo -> query("SELECT prenom, tirage FROM joueurs ORDER BY id");
+$req = $pdo -> query("SELECT prenom FROM joueurs ORDER BY id");
 $joueurs = $req -> fetchAll(PDO::FETCH_ASSOC);
 $_SESSION['joueurs'][0]['joue'] = false;
 $_SESSION['joueurs'][1]['joue'] = false;
@@ -127,14 +128,14 @@ include('inc/head.inc.php');
             <?php if ($idJoueurEnAttente == 0 || $idJoueurEnAttente == $_SESSION['joueur']['id']) : ?>
                 <?php
                 // récupération du tirage pour le joueur en jeu
-                $idJoueur = $_SESSION['joueur']['id'];
+                // $idJoueur = $_SESSION['joueur']['id'];
                 $tirage = $_SESSION['tirage'];
-                $_SESSION['joueurs'][$idJoueur - 1]['tirage'] = $tirage;
-                $pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id=$idJoueur");
+                // $_SESSION['joueurs'][$idJoueur - 1]['tirage'] = $tirage;
+                // $pdo->query("UPDATE joueurs SET tirage = '$tirage' WHERE id=$idJoueur");
                 ?>
 
 
-                <?php include ('panneauSaisies.php'); ?>
+                <?php include ('inc/panneauSaisies.inc.php'); ?>
             <?php else : ?>
                 <div class="row">
                     <div id="attente">

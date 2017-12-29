@@ -28,7 +28,7 @@ function userConnecte(){
 // mise à zéro du tirage
 function videTirage($pdo){
 	$req = $pdo -> query("UPDATE infos SET info='' WHERE info_type='tirage'");
-	$req = $pdo -> query("UPDATE joueurs SET tirage=''");
+	// $req = $pdo -> query("UPDATE joueurs SET tirage=''");
 	// $req -> execute();
 }
 
