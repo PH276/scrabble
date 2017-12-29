@@ -133,7 +133,9 @@ $(document).ready(function() {
 $('.position').on('click', function(e){
     console.log(proposition.mot.value.length);
     // if (proposition.mot.value.length() ==){
+        proposition.position.value = $(this)[0].id;
         $('#position').html($(this)[0].id);
+
     // }
 
 });

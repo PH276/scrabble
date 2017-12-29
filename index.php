@@ -8,11 +8,6 @@ if (!userConnecte()) {
 // initialisation  comme quoi les 2 joueurs n'ont pas joué dans le tour en cours
 $_SESSION['unJoueurEnAttente'] = false;
 
-// cas d'une demande de nouvelle partie
-// if (isset($_POST['newPartie'])){
-//     header('newPartie.php');
-// }
-
 
 // if (empty($_SESSION)){
 
@@ -36,10 +31,6 @@ foreach ($lettres as $lettre){
     $stockLettres[$lettre['lettre']]['pts'] = $lettre['points'];
 }
 $_SESSION['lettres'] = $stockLettres;
-// if (strlen($tirage['info']) < 7) {
-//     include('tirageAutomatique.php');
-// }
-// }
 
 // récupération des lettres du jeu en cas de nouvelle session
 // if (!isset($_SESSION['jeu'])){

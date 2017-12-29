@@ -32,13 +32,6 @@
             ' disabled ':''; ?>
             <fieldset id="mot-propose">
 
-
-
-
-
-
-                <!-- champ rempli automatiquement en sélectionnannant des lettres du tirages (et du jeu) -->
-
                 <div class="form-group">
                     <label>Mot : </label><span id="motPropose"></span>
                     <table>
@@ -49,8 +42,12 @@
                         </tbody>
                     </table>
 
+                    <!-- champ rempli automatiquement en sélectionnannant des lettres du tirages (et du jeu) -->
                     <input class="form-control mot" type="hidden" name="mot"  value="">
                 </div>
+                <!-- bouton pour annuler l'essai en cours -->
+                <a class="btn btn-warning" href=".">Annuler</a>
+
                 <div class="row">
 
                     <div class="form-group col-md-4">
@@ -58,7 +55,7 @@
                         <input class="form-control" type="number" name="points" value="" title="Entrer le nombre de points qu'il rapporte" required >
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="">Position : <span id="position"></span></label>
+                        <label title="position de la première lettre du mot">Position : <span id="position"></span></label>
                         <input class="form-control" type="text" name="position" value="" title="position de la première lettre du mot" required>
                     </div>
                     <div class="form-group col-md-4">
