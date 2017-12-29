@@ -8,12 +8,12 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
 
     // enregistrement d'un mot proposé par le joueur 1
     if ($idJoueur == 1){
-        $req = $pdo -> prepare("UPDATE resultats SET resultat_joueur1 = :points, mot_joueur1 = :mot, position_mot = :position, sens = :sens WHERE id_partie = '1' AND tour = :tour");
+        $req = $pdo -> prepare("UPDATE resultats SET resultat_joueur1 = :points, mot_joueur1 = :mot, position_mot_joueur1 = :position, sens_mot_joueur1 = :sens WHERE id_partie = '1' AND tour = :tour");
     }
 
     // enregistrement d'un mot proposé par le joueur 2
     if ($idJoueur == 2){
-        $req = $pdo -> prepare("UPDATE resultats SET resultat_joueur2 = :points, mot_joueur2 = :mot, position_mot = :position, sens = :sens WHERE id_partie = '1' AND tour = :tour");
+        $req = $pdo -> prepare("UPDATE resultats SET resultat_joueur2 = :points, mot_joueur2 = :mot, position_mot_joueur2 = :position, sens_mot_joueur2 = :sens WHERE id_partie = '1' AND tour = :tour");
     }
 
     $req -> bindParam (':tour', $_SESSION['tour'], PDO::PARAM_INT);
@@ -32,17 +32,6 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
         $_SESSION['unJoueurEnAttente'] = false;
         // debug($resultats);
         extract($resultats);
-        if ($idJoueur == 1){
-            $positionMotJoueur1 = $_POST['position'];
-            $positionMotJoueur2 = $position_mot;
-            $sensMotJoueur1 = $_POST['sens'];
-            $sensMotJoueur2 = $sens;
-        }else {
-            $positionMotJoueur1 = $position_mot;
-            $positionMotJoueur2 = $_POST['position'];
-            $sensMotJoueur1 = $sens;
-            $sensMotJoueur2 = $_POST['sens'];
-        }
         // debug($_SESSION);
         if ($_SESSION['tour'] == $tour){
 
@@ -50,13 +39,13 @@ if (isset ($_POST['points']) && isset($_POST['mot']) && isset($_POST['position']
             if ($resultat_joueur1 > $resultat_joueur2){
                 $_SESSION['tirage'] = $_SESSION['joueurs'][0]['tirage'];
                 $motRretenu = $mot_joueur1;
-                $positionMot = $positionMotJoueur1;
-                $sensMot = $sensMotJoueur1;
+                $positionMot = $position_mot_joueur1;
+                $sensMot = $sens_mot_joueur1;
             }else {
                 $_SESSION['tirage'] = $_SESSION['joueurs'][1]['tirage'];
                 $motRretenu = $mot_joueur2;
-                $positionMot = $positionMotJoueur2;
-                $sensMot = $sensMotJoueur2;
+                $positionMot = $position_mot_joueur2;
+                $sensMot = $sens_mot_joueur2;
             }
 
             include ('inc/positionnerMot.inc.php');
