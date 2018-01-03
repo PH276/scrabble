@@ -17,7 +17,7 @@
                 <?php $position = chr($i+65).($j+1);
                 $isLettrePlacee =  isset($_SESSION['jeu'][$position]);
                 $lettre = ($isLettrePlacee)?$_SESSION['jeu'][$position]:'';
-                $pts = ($isLettrePlacee)?$_SESSION['lettres'][$lettre]['pts']:'';
+                $pts = ($isLettrePlacee && $_SESSION['lettres'][$lettre]['pts'] !=0)?$_SESSION['lettres'][$lettre]['pts']:'';
                 $lettrePlacee = ($isLettrePlacee)?$lettre."<span>$pts</span>":'';
                 $caseLettre = ($isLettrePlacee)?' lettre':' case-valeur';
                 ?>
